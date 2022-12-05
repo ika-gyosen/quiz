@@ -1,0 +1,19 @@
+{
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.packageManager": "yarn",
+  "eslint.workingDirectories": [
+    { "directory": "./packages/app", "changeProcessCWD": true },
+    { "directory": "./packages/bff", "changeProcessCWD": true },
+    { "directory": "./packages/hasura", "changeProcessCWD": true }
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}
