@@ -36,13 +36,6 @@ module.exports = {
         checksVoidReturn: false,
       },
     ],
-    '@typescript-eslint/naming-convention': [
-      'error',
-      {
-        selector: 'typeAlias',
-        format: ['PascalCase'],
-      },
-    ],
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/naming-convention': [
       'error',
