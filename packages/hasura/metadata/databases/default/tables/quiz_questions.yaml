@@ -1,6 +1,6 @@
 table:
   name: questions
-  schema: public
+  schema: quiz
 object_relationships:
   - name: answer_types_to_questions
     using:
@@ -10,7 +10,7 @@ object_relationships:
         insertion_order: null
         remote_table:
           name: answer_types
-          schema: public
+          schema: quiz
 array_relationships:
   - name: answers_to_questions
     using:
@@ -18,7 +18,7 @@ array_relationships:
         column: question_id
         table:
           name: answers
-          schema: public
+          schema: quiz
   - name: tags_to_questions_to_questions
     using:
       manual_configuration:
@@ -27,4 +27,4 @@ array_relationships:
         insertion_order: null
         remote_table:
           name: tags_to_questions
-          schema: public
+          schema: quiz

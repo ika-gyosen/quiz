@@ -1,1 +1,1 @@
-DROP TABLE "public"."questions";
+DROP TABLE "quiz"."questions";

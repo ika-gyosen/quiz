@@ -1,6 +1,6 @@
 table:
   name: tags_to_questions
-  schema: public
+  schema: quiz
 object_relationships:
   - name: tags_to_questions_to_tags
     using:
@@ -10,4 +10,4 @@ object_relationships:
         insertion_order: null
         remote_table:
           name: tags
-          schema: public
+          schema: quiz
