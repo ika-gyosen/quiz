@@ -1,1 +1,5 @@
-[]
+- "!include public_answer_types.yaml"
+- "!include public_answers.yaml"
+- "!include public_questions.yaml"
+- "!include public_tags.yaml"
+- "!include public_tags_to_questions.yaml"

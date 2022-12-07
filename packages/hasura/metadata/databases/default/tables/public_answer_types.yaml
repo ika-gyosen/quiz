@@ -1,0 +1,3 @@
+table:
+  name: answer_types
+  schema: public
