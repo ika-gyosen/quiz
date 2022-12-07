@@ -5,12 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=local webpack --watch --progress",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --ext .ts .",
+    "codegen": "graphql-codegen"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.15.0",
+    "@graphql-codegen/near-operation-file-preset": "^2.4.4",
+    "@graphql-codegen/typescript": "^2.8.3",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.8",
+    "@graphql-codegen/typescript-operations": "^2.5.8",
+    "@graphql-codegen/typescript-resolvers": "^2.7.8",
     "@types/express": "^4.17.14",
     "@types/node": "^18.11.10",
     "@typescript-eslint/eslint-plugin": "^5.45.1",
