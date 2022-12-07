@@ -1,4 +1,4 @@
-- name: quiz
+- name: default
   kind: postgres
   configuration:
     connection_info:
@@ -7,4 +7,4 @@
       use_prepared_statements: false
   customization:
     naming_convention: hasura-default
-  tables: "!include quiz/tables/tables.yaml"
+  tables: "!include default/tables/tables.yaml"
