@@ -7,8 +7,8 @@
   ],
   "eslint.packageManager": "yarn",
   "eslint.workingDirectories": [
-    { "directory": "./packages/app", "changeProcessCWD": true },
-    { "directory": "./packages/bff", "changeProcessCWD": true },
+    { "directory": "./packages/searchApp", "changeProcessCWD": true },
+    { "directory": "./packages/searchBFF", "changeProcessCWD": true },
     { "directory": "./packages/hasura", "changeProcessCWD": true }
   ],
   "editor.codeActionsOnSave": {
