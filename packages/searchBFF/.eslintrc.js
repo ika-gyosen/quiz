@@ -3,101 +3,101 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    sourceType: "module",
+    sourceType: 'module',
     ecmaVersion: 12,
-    project: ["./tsconfig.json"],
+    project: ['./tsconfig.json'],
     tsconfigRootDir: __dirname,
   },
-  plugins: ["@typescript-eslint", "import", "unused-imports"],
+  plugins: ['@typescript-eslint', 'import', 'unused-imports'],
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:import/recommended",
-    "plugin:import/typescript",
-    "prettier",
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'prettier',
   ],
-  ignorePatterns: [".eslintrc.js", "*.config.js", "codegen.js", "setupTest.js"],
+  ignorePatterns: ['.eslintrc.js', '*.config.js', 'codegen.js', 'setupTest.js'],
   rules: {
     // eslint
-    "no-unused-vars": "off", // @typescript-eslint/no-unused-varsを有効化するため、オフにする。
+    'no-unused-vars': 'off', // @typescript-eslint/no-unused-varsを有効化するため、オフにする。
 
     // typescript-eslint
-    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-    "@typescript-eslint/no-unsafe-assignment": "off",
-    "@typescript-eslint/no-unsafe-member-access": "off",
-    "@typescript-eslint/no-floating-promises": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-misused-promises": [
-      "error",
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-misused-promises': [
+      'error',
       {
         checksVoidReturn: false,
       },
     ],
-    "@typescript-eslint/naming-convention": [
-      "error",
+    '@typescript-eslint/naming-convention': [
+      'error',
       {
-        selector: "typeAlias",
-        format: ["PascalCase"],
+        selector: 'typeAlias',
+        format: ['PascalCase'],
       },
     ],
-    "@typescript-eslint/unbound-method": "off",
-    "@typescript-eslint/naming-convention": [
-      "error",
+    '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/naming-convention': [
+      'error',
       {
-        selector: "typeAlias",
-        format: ["PascalCase"],
+        selector: 'typeAlias',
+        format: ['PascalCase'],
       },
     ],
 
     // unused-imports
-    "unused-imports/no-unused-imports-ts": "warn",
+    'unused-imports/no-unused-imports-ts': 'warn',
 
     // import
-    "import/namespace": "off",
-    "import/order": [
-      "error",
+    'import/namespace': 'off',
+    'import/order': [
+      'error',
       {
         pathGroups: [
           {
-            pattern: "~/**",
-            group: "external",
-            position: "after",
+            pattern: '~/**',
+            group: 'external',
+            position: 'after',
           },
         ],
         groups: [
-          "builtin",
-          "external",
-          "internal",
-          "unknown",
-          "parent",
-          "sibling",
-          "index",
-          "object",
-          "type",
+          'builtin',
+          'external',
+          'internal',
+          'unknown',
+          'parent',
+          'sibling',
+          'index',
+          'object',
+          'type',
         ],
       },
     ],
-    "no-restricted-imports": [
-      "error",
+    'no-restricted-imports': [
+      'error',
       {
         patterns: [
           {
-            group: ["./", "../"],
+            group: ['./', '../'],
           },
         ],
       },
     ],
   },
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       node: {
-        extensions: [".js", ".ts"],
+        extensions: ['.js', '.ts'],
       },
       typescript: {
-        project: "./tsconfig.json",
+        project: './tsconfig.json',
       },
     },
   },
