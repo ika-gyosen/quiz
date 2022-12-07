@@ -1,7 +1,7 @@
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
-import { schema } from "./schema";
+import { schema } from "~/schema";
 
 const port = process.env.PORT || 1111;
 
