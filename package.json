@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "app": "yarn workspace app",
-    "bff": "yarn workspace bff",
+    "searchApp": "yarn workspace searchApp",
+    "searchBFF": "yarn workspace searchBFF",
     "hasura": "yarn workspace hasura"
   },
   "repository": {
