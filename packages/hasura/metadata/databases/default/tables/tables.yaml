@@ -1,5 +1,7 @@
 - "!include quiz_answer_types.yaml"
 - "!include quiz_answers.yaml"
+- "!include quiz_categories.yaml"
 - "!include quiz_questions.yaml"
 - "!include quiz_tags.yaml"
 - "!include quiz_tags_to_questions.yaml"
+- "!include quiz_users.yaml"
