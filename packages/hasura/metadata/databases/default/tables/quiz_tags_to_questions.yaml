@@ -1,13 +1,3 @@
 table:
   name: tags_to_questions
   schema: quiz
-object_relationships:
-  - name: tags_to_questions_to_tags
-    using:
-      manual_configuration:
-        column_mapping:
-          tag_id: tag_id
-        insertion_order: null
-        remote_table:
-          name: tags
-          schema: quiz
