@@ -11,7 +11,8 @@
     "metadata": "hasura metadata apply --skip-update-check",
     "metadataReload": "hasura metadata reload --skip-update-check",
     "migrate": "hasura migrate apply --database-name default --skip-update-check",
-    "status": "hasura migrate status --database-name default"
+    "status": "hasura migrate status --database-name default",
+    "seed:apply:TEST_1": "hasura seed apply --file TEST_1.sql --database-name default"
   },
   "keywords": [],
   "author": "",
