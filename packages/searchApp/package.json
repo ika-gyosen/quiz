@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.2",
+    "@emotion/css": "^11.10.5",
     "graphql": "^16.6.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.5"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^3.2.3",
