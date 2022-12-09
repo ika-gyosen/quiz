@@ -1,11 +1,16 @@
-import { ApolloProvider } from '~/providers/Apollo';
-import { Test } from '~/Test';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Layout } from '~/components/Layout';
+import { Top } from '~/pages/Top';
 
 const App = () => {
   return (
-    <ApolloProvider>
-      <Test />
-    </ApolloProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Top />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
