@@ -1,8 +1,12 @@
 import { ApolloProvider } from '~/providers/Apollo';
-// import { Test } from '~/Test';
+import { Test } from '~/Test';
 
 const App = () => {
-  return <ApolloProvider>quiz</ApolloProvider>;
+  return (
+    <ApolloProvider>
+      <Test />
+    </ApolloProvider>
+  );
 };
 
 export default App;
