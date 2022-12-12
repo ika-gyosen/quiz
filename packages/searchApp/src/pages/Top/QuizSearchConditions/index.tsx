@@ -1,8 +1,10 @@
+import Select from '@mui/material/Select';
 import { css } from '@emotion/css';
+import { MenuItem } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
 import { Button } from '~/components/Button';
-import { Select, Option } from '~/components/Select';
-import { TextField } from '~/components/TextField';
-
+import { Option } from '~/components/Select';
 const options: Option<number>[] = [{ value: 1, label: 'test' }];
 export const QuizSearchConditions = () => {
   return (
@@ -10,30 +12,40 @@ export const QuizSearchConditions = () => {
       <div className={searchInputRowStype}>
         <div>
           難易度:
-          <Select
-            value={1}
-            options={options}
-            onChange={() => {
-              return;
-            }}
-          />
+          <FormControl size="small">
+            <Select
+              onChange={() => {
+                return;
+              }}>
+              {options.map(({ label, value }) => (
+                <MenuItem key={label} value={value}>
+                  {label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
         <div>
-          難易度:
-          <Select
-            value={1}
-            options={options}
-            onChange={() => {
-              return;
-            }}
-          />
+          ジャンル:
+          <FormControl size="small">
+            <Select
+              onChange={() => {
+                return;
+              }}>
+              {options.map(({ label, value }) => (
+                <MenuItem key={label} value={value}>
+                  {label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
       </div>
       <div className={searchInputRowStype}>
         <div>
           タグ：
           <TextField
-            value={''}
+            variant="standard"
             onChange={() => {
               return;
             }}
@@ -42,7 +54,7 @@ export const QuizSearchConditions = () => {
         </div>
         <div>
           <TextField
-            value={''}
+            variant="standard"
             onChange={() => {
               return;
             }}
@@ -54,7 +66,7 @@ export const QuizSearchConditions = () => {
         <div>
           問題文：
           <TextField
-            value={''}
+            variant="standard"
             onChange={() => {
               return;
             }}
@@ -63,7 +75,7 @@ export const QuizSearchConditions = () => {
         </div>
         <div>
           <TextField
-            value={''}
+            variant="standard"
             onChange={() => {
               return;
             }}
@@ -74,13 +86,18 @@ export const QuizSearchConditions = () => {
       <div className={searchInputRowStype}>
         <div>
           表示する問題数:
-          <Select
-            value={1}
-            options={options}
-            onChange={() => {
-              return;
-            }}
-          />
+          <FormControl size="small">
+            <Select
+              onChange={() => {
+                return;
+              }}>
+              {options.map(({ label, value }) => (
+                <MenuItem key={label} value={value}>
+                  {label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
         <div>
           <Button
