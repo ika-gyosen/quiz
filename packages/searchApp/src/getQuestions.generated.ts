@@ -7,11 +7,8 @@ const defaultOptions = {} as const;
 export type GetQuestionsQueryVariables = Types.Exact<{
   difficulties?: Types.InputMaybe<Array<Types.Scalars['Int']> | Types.Scalars['Int']>;
   categoryIds?: Types.InputMaybe<Array<Types.Scalars['Int']> | Types.Scalars['Int']>;
-  targetTag?: Types.InputMaybe<Types.Scalars['String']>;
-  notTagetTag?: Types.InputMaybe<Types.Scalars['String']>;
   containWord?: Types.InputMaybe<Types.Scalars['String']>;
   notContainWord?: Types.InputMaybe<Types.Scalars['String']>;
-  targetTagIsNull: Types.Scalars['Boolean'];
 }>;
 
 
@@ -19,9 +16,9 @@ export type GetQuestionsQuery = { __typename?: 'query_root', questions: Array<{ 
 
 
 export const GetQuestionsDocument = gql`
-    query getQuestions($difficulties: [Int!], $categoryIds: [Int!], $targetTag: String, $notTagetTag: String, $containWord: String, $notContainWord: String, $targetTagIsNull: Boolean!) {
+    query getQuestions($difficulties: [Int!], $categoryIds: [Int!], $containWord: String, $notContainWord: String) {
   questions(
-    input: {difficulties: $difficulties, categoryIds: $categoryIds, targetTag: $targetTag, notTagetTag: $notTagetTag, containWord: $containWord, notContainWord: $notContainWord, targetTagIsNull: $targetTagIsNull}
+    input: {difficulties: $difficulties, categoryIds: $categoryIds, containWord: $containWord, notContainWord: $notContainWord}
   ) {
     questionId
     serialNumber
@@ -54,15 +51,12 @@ export const GetQuestionsDocument = gql`
  *   variables: {
  *      difficulties: // value for 'difficulties'
  *      categoryIds: // value for 'categoryIds'
- *      targetTag: // value for 'targetTag'
- *      notTagetTag: // value for 'notTagetTag'
  *      containWord: // value for 'containWord'
  *      notContainWord: // value for 'notContainWord'
- *      targetTagIsNull: // value for 'targetTagIsNull'
  *   },
  * });
  */
-export function useGetQuestionsQuery(baseOptions: Apollo.QueryHookOptions<GetQuestionsQuery, GetQuestionsQueryVariables>) {
+export function useGetQuestionsQuery(baseOptions?: Apollo.QueryHookOptions<GetQuestionsQuery, GetQuestionsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetQuestionsQuery, GetQuestionsQueryVariables>(GetQuestionsDocument, options);
       }

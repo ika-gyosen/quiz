@@ -11,18 +11,6 @@ export const typeDefs = gql`
     """
     categoryIds: [Int!]
     """
-    タグ(検索対象となる)
-    """
-    targetTag: String
-    """
-    タグ(検索対象外となる)
-    """
-    notTagetTag: String
-    """
-    タグがnullのデータを抽出結果に含めるか
-    """
-    targetTagIsNull: Boolean!
-    """
     含んでいると検索対象となる単語
     """
     containWord: String

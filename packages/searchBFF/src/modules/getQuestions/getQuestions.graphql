@@ -1,9 +1,6 @@
 query getQuestions(
   $difficulties: [Int!]
   $categoryIds: [Int!]
-  $targetTag: String
-  $notTagetTag: String
-  $targetTagIsNull: Boolean!
   $containWord: String
   $notContainWord: String
 ) {
@@ -12,20 +9,6 @@ query getQuestions(
       difficulty: { _in: $difficulties }
       category_id: { _in: $categoryIds }
       question: { _ilike: $containWord, _nilike: $notContainWord }
-      _or: [
-        {
-          tags_to_questions_to_questions: {
-            tags_to_questions_to_tags: {
-              tag: { _eq: $targetTag, _neq: $notTagetTag }
-            }
-          }
-        }
-        {
-          tags_to_questions_to_questions: {
-            tags_to_questions_to_tags: { tag: { _is_null: $targetTagIsNull } }
-          }
-        }
-      ]
     }
   ) {
     id

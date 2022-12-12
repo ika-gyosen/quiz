@@ -1,21 +1,15 @@
 query getQuestions(
   $difficulties: [Int!]
   $categoryIds: [Int!]
-  $targetTag: String
-  $notTagetTag: String
   $containWord: String
   $notContainWord: String
-  $targetTagIsNull: Boolean!
 ) {
   questions(
     input: {
       difficulties: $difficulties
       categoryIds: $categoryIds
-      targetTag: $targetTag
-      notTagetTag: $notTagetTag
       containWord: $containWord
       notContainWord: $notContainWord
-      targetTagIsNull: $targetTagIsNull
     }
   ) {
     questionId

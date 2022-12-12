@@ -11,9 +11,6 @@ export const getQuestions = async (
     categoryIds: input.categoryIds,
     containWord: input.containWord,
     notContainWord: input.notContainWord,
-    targetTag: input.targetTag,
-    notTagetTag: input.notTagetTag,
-    targetTagIsNull: input.targetTagIsNull,
   });
 
   return res.quiz_questions.map(
