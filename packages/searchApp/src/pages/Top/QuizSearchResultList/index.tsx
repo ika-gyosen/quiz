@@ -1,3 +1,5 @@
+import { Test } from '~/Test';
+
 export type QuizSearchResultItem = {
   id: string;
   serial_number: number;
@@ -32,30 +34,31 @@ const dummyQuizData: QuizSearchResultItem[] = [
   },
 ];
 export const QuizSearchResultList = () => {
-  return (
-    <table>
-      <tr>
-        <th>No.</th>
-        <th>難易度</th>
-        <th>ジャンル</th>
-        <th>問題</th>
-        <th>解答</th>
-        <th>読み方</th>
-        <th>別解・備考</th>
-      </tr>
-      {dummyQuizData.map((question) => {
-        return (
-          <tr key={question.id}>
-            <td>{question.serial_number}</td>
-            <td>{question.difficulty}</td>
-            <td>{question.category}</td>
-            <td>{question.question}</td>
-            <td>{question.answer}</td>
-            <td>{question.pronunciation}</td>
-            <td>{question.description}</td>
-          </tr>
-        );
-      })}
-    </table>
-  );
+  // return (
+  //   <table>
+  //     <tr>
+  //       <th>No.</th>
+  //       <th>難易度</th>
+  //       <th>ジャンル</th>
+  //       <th>問題</th>
+  //       <th>解答</th>
+  //       <th>読み方</th>
+  //       <th>別解・備考</th>
+  //     </tr>
+  //     {dummyQuizData.map((question) => {
+  //       return (
+  //         <tr key={question.id}>
+  //           <td>{question.serial_number}</td>
+  //           <td>{question.difficulty}</td>
+  //           <td>{question.category}</td>
+  //           <td>{question.question}</td>
+  //           <td>{question.answer}</td>
+  //           <td>{question.pronunciation}</td>
+  //           <td>{question.description}</td>
+  //         </tr>
+  //       );
+  //     })}
+  //   </table>
+  // );
+  return <Test />;
 };

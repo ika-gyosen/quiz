@@ -4,35 +4,36 @@ import * as Types from './types/graphql';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-export type GetQuestionsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type GetQuestionsQueryVariables = Types.Exact<{
+  difficulties?: Types.InputMaybe<Array<Types.Scalars['Int']> | Types.Scalars['Int']>;
+  categoryIds?: Types.InputMaybe<Array<Types.Scalars['Int']> | Types.Scalars['Int']>;
+  targetTag?: Types.InputMaybe<Types.Scalars['String']>;
+  notTagetTag?: Types.InputMaybe<Types.Scalars['String']>;
+  containWord?: Types.InputMaybe<Types.Scalars['String']>;
+  notContainWord?: Types.InputMaybe<Types.Scalars['String']>;
+}>;
 
 
-export type GetQuestionsQuery = { __typename?: 'query_root', quiz_questions: Array<{ __typename?: 'quiz_questions', id: any, serial_number: number, difficulty: number, question: string, author?: string | undefined, categories_to_questions?: { __typename?: 'quiz_categories', category: string } | undefined, answers_to_questions: Array<{ __typename?: 'quiz_answers', answer: string, description?: string | undefined, pronunciation?: string | undefined }>, tags_to_questions_to_questions: Array<{ __typename?: 'quiz_tags_to_questions', tags_to_questions_to_tags?: { __typename?: 'quiz_tags', tag: string } | undefined }>, users_to_questions: { __typename?: 'quiz_users', user_name: string } }> };
+export type GetQuestionsQuery = { __typename?: 'query_root', questions: Array<{ __typename?: 'Question', questionId: string, serialNumber: number, difficulty?: number | undefined, category?: string | undefined, question: string, tags?: Array<string | undefined> | undefined, userName: string, author?: string | undefined, answers: Array<{ __typename?: 'Answer', answer: string, pronunciation?: string | undefined, description?: string | undefined }> } | undefined> };
 
 
 export const GetQuestionsDocument = gql`
-    query getQuestions {
-  quiz_questions {
-    id
-    serial_number
+    query getQuestions($difficulties: [Int!], $categoryIds: [Int!], $targetTag: String, $notTagetTag: String, $containWord: String, $notContainWord: String) {
+  questions(
+    input: {difficulties: $difficulties, categoryIds: $categoryIds, targetTag: $targetTag, notTagetTag: $notTagetTag, containWord: $containWord, notContainWord: $notContainWord}
+  ) {
+    questionId
+    serialNumber
     difficulty
-    categories_to_questions {
-      category
-    }
+    category
     question
-    answers_to_questions {
+    answers {
       answer
-      description
       pronunciation
+      description
     }
-    tags_to_questions_to_questions {
-      tags_to_questions_to_tags {
-        tag
-      }
-    }
-    users_to_questions {
-      user_name
-    }
+    tags
+    userName
     author
   }
 }
@@ -50,6 +51,12 @@ export const GetQuestionsDocument = gql`
  * @example
  * const { data, loading, error } = useGetQuestionsQuery({
  *   variables: {
+ *      difficulties: // value for 'difficulties'
+ *      categoryIds: // value for 'categoryIds'
+ *      targetTag: // value for 'targetTag'
+ *      notTagetTag: // value for 'notTagetTag'
+ *      containWord: // value for 'containWord'
+ *      notContainWord: // value for 'notContainWord'
  *   },
  * });
  */

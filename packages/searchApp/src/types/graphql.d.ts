@@ -15,10 +15,26 @@ export type Scalars = {
   uuid: any;
 };
 
-export type Book = {
-  __typename?: 'Book';
-  author?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
+export type Answer = {
+  __typename?: 'Answer';
+  answer: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  pronunciation?: Maybe<Scalars['String']>;
+};
+
+export type GetQuestionsInput = {
+  /** ジャンル */
+  categoryIds?: InputMaybe<Array<Scalars['Int']>>;
+  /** 含んでいると検索対象となる単語 */
+  containWord?: InputMaybe<Scalars['String']>;
+  /** 難易度 */
+  difficulties?: InputMaybe<Array<Scalars['Int']>>;
+  /** 含んでいると検索対象外となる単語 */
+  notContainWord?: InputMaybe<Scalars['String']>;
+  /** タグ(検索対象外となる) */
+  notTagetTag?: InputMaybe<Scalars['String']>;
+  /** タグ(検索対象となる) */
+  targetTag?: InputMaybe<Scalars['String']>;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -32,6 +48,19 @@ export type IntComparisonExp = {
   _lte?: InputMaybe<Scalars['Int']>;
   _neq?: InputMaybe<Scalars['Int']>;
   _nin?: InputMaybe<Array<Scalars['Int']>>;
+};
+
+export type Question = {
+  __typename?: 'Question';
+  answers: Array<Answer>;
+  author?: Maybe<Scalars['String']>;
+  category?: Maybe<Scalars['String']>;
+  difficulty?: Maybe<Scalars['Int']>;
+  question: Scalars['String'];
+  questionId: Scalars['String'];
+  serialNumber: Scalars['Int'];
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  userName: Scalars['String'];
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -523,7 +552,7 @@ export type OrderBy =
 
 export type QueryRoot = {
   __typename?: 'query_root';
-  books?: Maybe<Array<Maybe<Book>>>;
+  questions: Array<Maybe<Question>>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
   /** fetch aggregated fields from the table: "quiz.answer_types" */
@@ -566,6 +595,11 @@ export type QueryRoot = {
   quiz_users_aggregate: QuizUsersAggregate;
   /** fetch data from the table: "quiz.users" using primary key columns */
   quiz_users_by_pk?: Maybe<QuizUsers>;
+};
+
+
+export type QueryRootQuestionsArgs = {
+  input: GetQuestionsInput;
 };
 
 
