@@ -1,25 +1,29 @@
-query getQuestions {
-  quiz_questions {
-    id
-    serial_number
+query getQuestions(
+  $difficulties: [Int!]
+  $categoryIds: [Int!]
+  $containWord: String
+  $notContainWord: String
+) {
+  questions(
+    input: {
+      difficulties: $difficulties
+      categoryIds: $categoryIds
+      containWord: $containWord
+      notContainWord: $notContainWord
+    }
+  ) {
+    questionId
+    serialNumber
     difficulty
-    categories_to_questions {
-      category
-    }
+    category
     question
-    answers_to_questions {
+    answers {
       answer
-      description
       pronunciation
+      description
     }
-    tags_to_questions_to_questions {
-      tags_to_questions_to_tags {
-        tag
-      }
-    }
-    users_to_questions {
-      user_name
-    }
+    tags
+    userName
     author
   }
 }
