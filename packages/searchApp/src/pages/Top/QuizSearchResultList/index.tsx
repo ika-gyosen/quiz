@@ -1,4 +1,10 @@
-import { Test } from '~/Test';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 export type QuizSearchResultItem = {
   id: string;
@@ -34,31 +40,48 @@ const dummyQuizData: QuizSearchResultItem[] = [
   },
 ];
 export const QuizSearchResultList = () => {
-  // return (
-  //   <table>
-  //     <tr>
-  //       <th>No.</th>
-  //       <th>難易度</th>
-  //       <th>ジャンル</th>
-  //       <th>問題</th>
-  //       <th>解答</th>
-  //       <th>読み方</th>
-  //       <th>別解・備考</th>
-  //     </tr>
-  //     {dummyQuizData.map((question) => {
-  //       return (
-  //         <tr key={question.id}>
-  //           <td>{question.serial_number}</td>
-  //           <td>{question.difficulty}</td>
-  //           <td>{question.category}</td>
-  //           <td>{question.question}</td>
-  //           <td>{question.answer}</td>
-  //           <td>{question.pronunciation}</td>
-  //           <td>{question.description}</td>
-  //         </tr>
-  //       );
-  //     })}
-  //   </table>
-  // );
-  return <Test />;
+  return (
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>No.</TableCell>
+            <TableCell>難易度</TableCell>
+            <TableCell>ジャンル</TableCell>
+            <TableCell>問題</TableCell>
+            <TableCell>回答</TableCell>
+            <TableCell>読み方</TableCell>
+            <TableCell>別解・備考</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {dummyQuizData.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell component="th" scope="row">
+                {row.serial_number}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {row.difficulty}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {row.category}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {row.question}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {row.answer}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {row.pronunciation}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {row.description}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 };
