@@ -12,6 +12,7 @@ export type GetQuestionsQueryVariables = Types.Exact<{
   >;
   targetTag?: Types.InputMaybe<Types.Scalars['String']>;
   notTagetTag?: Types.InputMaybe<Types.Scalars['String']>;
+  targetTagIsNull: Types.Scalars['Boolean'];
   containWord?: Types.InputMaybe<Types.Scalars['String']>;
   notContainWord?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
@@ -52,6 +53,7 @@ export const GetQuestionsDocument = gql`
     $categoryIds: [Int!]
     $targetTag: String
     $notTagetTag: String
+    $targetTagIsNull: Boolean!
     $containWord: String
     $notContainWord: String
   ) {
@@ -60,11 +62,20 @@ export const GetQuestionsDocument = gql`
         difficulty: { _in: $difficulties }
         category_id: { _in: $categoryIds }
         question: { _ilike: $containWord, _nilike: $notContainWord }
-        tags_to_questions_to_questions: {
-          tags_to_questions_to_tags: {
-            tag: { _eq: $targetTag, _neq: $notTagetTag }
+        _or: [
+          {
+            tags_to_questions_to_questions: {
+              tags_to_questions_to_tags: {
+                tag: { _eq: $targetTag, _neq: $notTagetTag }
+              }
+            }
           }
-        }
+          {
+            tags_to_questions_to_questions: {
+              tags_to_questions_to_tags: { tag: { _is_null: $targetTagIsNull } }
+            }
+          }
+        ]
       }
     ) {
       id
@@ -110,7 +121,7 @@ export function getSdk(
 ) {
   return {
     getQuestions(
-      variables?: GetQuestionsQueryVariables,
+      variables: GetQuestionsQueryVariables,
       requestHeaders?: Dom.RequestInit['headers'],
     ): Promise<GetQuestionsQuery> {
       return withWrapper(

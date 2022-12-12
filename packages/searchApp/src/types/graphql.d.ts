@@ -35,6 +35,8 @@ export type GetQuestionsInput = {
   notTagetTag?: InputMaybe<Scalars['String']>;
   /** タグ(検索対象となる) */
   targetTag?: InputMaybe<Scalars['String']>;
+  /** タグがnullのデータを抽出結果に含めるか */
+  targetTagIsNull: Scalars['Boolean'];
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */

@@ -5,6 +5,7 @@ query getQuestions(
   $notTagetTag: String
   $containWord: String
   $notContainWord: String
+  $targetTagIsNull: Boolean!
 ) {
   questions(
     input: {
@@ -14,6 +15,7 @@ query getQuestions(
       notTagetTag: $notTagetTag
       containWord: $containWord
       notContainWord: $notContainWord
+      targetTagIsNull: $targetTagIsNull
     }
   ) {
     questionId

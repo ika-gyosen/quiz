@@ -19,6 +19,10 @@ export const typeDefs = gql`
     """
     notTagetTag: String
     """
+    タグがnullのデータを抽出結果に含めるか
+    """
+    targetTagIsNull: Boolean!
+    """
     含んでいると検索対象となる単語
     """
     containWord: String

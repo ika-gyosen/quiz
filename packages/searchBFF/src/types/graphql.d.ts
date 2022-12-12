@@ -46,10 +46,10 @@ export type GetQuestionsInput = {
   notContainWord?: InputMaybe<Scalars['String']>;
   /** タグ(検索対象外となる) */
   notTagetTag?: InputMaybe<Scalars['String']>;
-  /** 一画面で表示する問題数 */
-  numbersOfDisplayQuestions: Scalars['Int'];
   /** タグ(検索対象となる) */
   targetTag?: InputMaybe<Scalars['String']>;
+  /** タグがnullのデータを抽出結果に含めるか */
+  targetTagIsNull: Scalars['Boolean'];
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */

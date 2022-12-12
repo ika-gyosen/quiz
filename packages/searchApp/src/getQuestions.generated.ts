@@ -11,6 +11,7 @@ export type GetQuestionsQueryVariables = Types.Exact<{
   notTagetTag?: Types.InputMaybe<Types.Scalars['String']>;
   containWord?: Types.InputMaybe<Types.Scalars['String']>;
   notContainWord?: Types.InputMaybe<Types.Scalars['String']>;
+  targetTagIsNull: Types.Scalars['Boolean'];
 }>;
 
 
@@ -18,9 +19,9 @@ export type GetQuestionsQuery = { __typename?: 'query_root', questions: Array<{ 
 
 
 export const GetQuestionsDocument = gql`
-    query getQuestions($difficulties: [Int!], $categoryIds: [Int!], $targetTag: String, $notTagetTag: String, $containWord: String, $notContainWord: String) {
+    query getQuestions($difficulties: [Int!], $categoryIds: [Int!], $targetTag: String, $notTagetTag: String, $containWord: String, $notContainWord: String, $targetTagIsNull: Boolean!) {
   questions(
-    input: {difficulties: $difficulties, categoryIds: $categoryIds, targetTag: $targetTag, notTagetTag: $notTagetTag, containWord: $containWord, notContainWord: $notContainWord}
+    input: {difficulties: $difficulties, categoryIds: $categoryIds, targetTag: $targetTag, notTagetTag: $notTagetTag, containWord: $containWord, notContainWord: $notContainWord, targetTagIsNull: $targetTagIsNull}
   ) {
     questionId
     serialNumber
@@ -57,10 +58,11 @@ export const GetQuestionsDocument = gql`
  *      notTagetTag: // value for 'notTagetTag'
  *      containWord: // value for 'containWord'
  *      notContainWord: // value for 'notContainWord'
+ *      targetTagIsNull: // value for 'targetTagIsNull'
  *   },
  * });
  */
-export function useGetQuestionsQuery(baseOptions?: Apollo.QueryHookOptions<GetQuestionsQuery, GetQuestionsQueryVariables>) {
+export function useGetQuestionsQuery(baseOptions: Apollo.QueryHookOptions<GetQuestionsQuery, GetQuestionsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetQuestionsQuery, GetQuestionsQueryVariables>(GetQuestionsDocument, options);
       }
