@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useGetQuestionsQuery } from '~/getQuestions.generated';
+import { useSearch } from '~/pages/hooks/useSearch';
 
 export type QuizSearchResultItem = {
   id: string;
@@ -18,36 +18,8 @@ export type QuizSearchResultItem = {
   description: string;
 };
 
-// const dummyQuizData: QuizSearchResultItem[] = [
-//   {
-//     id: '1',
-//     serial_number: 1,
-//     difficulty: '普通',
-//     category: '文学',
-//     question: '『坊っちゃん』の作者は？',
-//     answer: '夏目漱石',
-//     pronunciation: 'なつめそうせき',
-//     description: '夏目金之助',
-//   },
-//   {
-//     id: '2',
-//     serial_number: 2,
-//     difficulty: '普通',
-//     category: '地理',
-//     question: 'トルコの首都は？',
-//     answer: 'アンカラ',
-//     pronunciation: 'あんから',
-//     description: '',
-//   },
-// ];
-
 export const QuizSearchResultList = () => {
-  const { data, loading, error } = useGetQuestionsQuery({
-    variables: {
-      difficulties: [1, 2],
-      categoryIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-    },
-  });
+  const { questions, loading, error } = useSearch();
 
   if (loading) {
     return <div>読み込み中です</div>;
@@ -57,7 +29,7 @@ export const QuizSearchResultList = () => {
     return <div>エラーが発生しました</div>;
   }
 
-  if (!data) {
+  if (typeof questions === 'undefined' || questions.length === 0) {
     return (
       <div>
         お探しの条件に当てはまる問題はありませんでした。検索条件を変えて再度検索してください。
@@ -80,7 +52,7 @@ export const QuizSearchResultList = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.questions.map((question) => (
+          {questions.map((question) => (
             <TableRow key={question?.questionId}>
               <TableCell component="th" scope="row">
                 {question?.serialNumber}
