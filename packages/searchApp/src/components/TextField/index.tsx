@@ -1,4 +1,5 @@
 import { ChangeEvent, useCallback } from 'react';
+import { TextField as MUITextField } from '@mui/material';
 
 type Props = {
   value: string;
@@ -11,5 +12,7 @@ export const TextField = ({ value, onChange }: Props) => {
     [onChange],
   );
 
-  return <input value={value} onChange={handleChange} />;
+  return (
+    <MUITextField value={value} onChange={handleChange} variant="standard" />
+  );
 };
