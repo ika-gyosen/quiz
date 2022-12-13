@@ -1,15 +1,26 @@
 import { css } from '@emotion/css';
-// import { Button } from '~/components/Button';
 import { Select } from '~/components/Select';
 import { TextField } from '~/components/TextField';
-import { useSearch } from '~/pages/hooks/useSearch';
 import {
   difficultyOptions,
   categoryOptions,
   questionsNumberOptions,
 } from '~/constants/options';
 
-export const QuizSearchConditions = () => {
+type Props = {
+  difficulty: number;
+  onChangeDifficulty: (item: number) => void;
+  category: number;
+  onChangeCategory: (item: number) => void;
+  containWord: string;
+  onChangeContainWord: (item: string) => void;
+  notContainWord: string;
+  onChangeNotContainWord: (item: string) => void;
+  questionsNumber: number;
+  onChangeQuestionsNumber: (item: number) => void;
+};
+
+export const QuizSearchConditions = (props: Props) => {
   const {
     difficulty,
     onChangeDifficulty,
@@ -21,8 +32,7 @@ export const QuizSearchConditions = () => {
     onChangeNotContainWord,
     questionsNumber,
     onChangeQuestionsNumber,
-    // onClickSearchButton,
-  } = useSearch();
+  } = props;
 
   return (
     <div className={searchInputWrapper}>
@@ -64,9 +74,6 @@ export const QuizSearchConditions = () => {
             onChange={onChangeQuestionsNumber}
           />
         </div>
-        {/* <div>
-          <Button label="検索を実行" onClick={() => onClickSearchButton()} />
-        </div> */}
       </div>
     </div>
   );

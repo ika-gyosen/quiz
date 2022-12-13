@@ -1,25 +1,23 @@
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { useSearch } from '~/pages/hooks/useSearch';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
+import { ApolloError } from '@apollo/client';
+import { Question } from '~/pages/Top/hooks/useSearch';
 
-export type QuizSearchResultItem = {
-  id: string;
-  serial_number: number;
-  difficulty: string;
-  category: string;
-  question: string;
-  answer: string;
-  pronunciation: string;
-  description: string;
+type Props = {
+  questions: Question[];
+  loading: boolean;
+  error: ApolloError | undefined;
 };
 
-export const QuizSearchResultList = () => {
-  const { questions, loading, error } = useSearch();
+export const QuizSearchResultList = (props: Props) => {
+  const { questions, loading, error } = props;
 
   if (loading) {
     return <div>読み込み中です</div>;

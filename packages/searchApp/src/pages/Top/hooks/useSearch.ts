@@ -1,14 +1,7 @@
-import { useState, useCallback } from 'react';
-import { useGetQuestionsQuery } from '~/getQuestions.generated';
-// import { useGetQuestionsLazyQuery } from '~/getQuestions.generated';
+import { useState, useCallback, useEffect } from 'react';
+import { useGetQuestionsQuery } from '~/pages/Top/getQuestions.generated';
 
-type Answer = {
-  answer: string;
-  pronunciation: string;
-  description: string;
-};
-
-type Question = {
+export type Question = {
   questionId: string;
   serialNumber: number;
   difficulty?: number;
@@ -18,6 +11,12 @@ type Question = {
   tags?: string[];
   userName: string;
   author?: string;
+};
+
+type Answer = {
+  answer: string;
+  pronunciation: string;
+  description: string;
 };
 
 export const useSearch = () => {
@@ -62,33 +61,18 @@ export const useSearch = () => {
     },
   });
 
-  // const [getQuestions, { data, loading, error }] = useGetQuestionsLazyQuery({
-  //   variables: {
-  //     ...(difficulty === 0 ? {} : { difficulties: [difficulty] }),
-  //     ...(category === 0 ? {} : { categoryIds: [category] }),
-  //     ...(containWord === '' ? {} : { containWord: `%${containWord}%` }),
-  //     ...(notContainWord === ''
-  //       ? {}
-  //       : { notContainWord: `%${notContainWord}%` }),
-  //   },
-  // });
+  const [questions, setQuestions] = useState<Question[]>([]);
 
-  // const handleClickSearchButton = useCallback(() => {
-  //   getQuestions();
-  // }, [getQuestions]);
+  useEffect(() => {
+    if (!data?.questions) return;
 
-  // const [questions, setQuestions] = useState<Question[]>([]);
-
-  // useEffect(() => {
-  //   if (!data?.questions) return;
-
-  //   const filteredQuestions = data.questions.filter(
-  //     (question): question is Question => {
-  //       return typeof question !== 'undefined';
-  //     },
-  //   );
-  //   setQuestions(filteredQuestions);
-  // }, [difficulty, category, containWord, notContainWord, data?.questions]);
+    const filteredQuestions = data.questions.filter(
+      (question): question is Question => {
+        return typeof question !== 'undefined';
+      },
+    );
+    setQuestions(filteredQuestions);
+  }, [difficulty, category, containWord, notContainWord, data?.questions]);
 
   console.log(data?.questions, loading);
 
@@ -98,14 +82,13 @@ export const useSearch = () => {
     containWord,
     notContainWord,
     questionsNumber,
-    questions: data?.questions,
-    loading: loading,
-    error: error,
+    questions,
+    loading,
+    error,
     onChangeDifficulty: handleChangeDifficulty,
     onChangeCategory: handleChangeCategory,
     onChangeContainWord: handleChangeContainWord,
     onChangeNotContainWord: handleChangeNotContainWord,
     onChangeQuestionsNumber: handleChangeQuestionsNumber,
-    // onClickSearchButton: handleClickSearchButton,
   };
 };
