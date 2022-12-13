@@ -7,7 +7,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "codegen": "graphql-codegen"
+    "codegen": "graphql-codegen",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@apollo/client": "^3.7.2",
@@ -21,18 +23,27 @@
     "react-router-dom": "^6.4.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.5",
     "@graphql-codegen/add": "^3.2.3",
     "@graphql-codegen/cli": "^2.16.1",
     "@graphql-codegen/near-operation-file-preset": "^2.4.4",
     "@graphql-codegen/typescript": "^2.8.5",
     "@graphql-codegen/typescript-operations": "^2.5.10",
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@storybook/addon-actions": "^6.5.14",
+    "@storybook/addon-essentials": "^6.5.14",
+    "@storybook/addon-interactions": "^6.5.14",
+    "@storybook/addon-links": "^6.5.14",
+    "@storybook/builder-vite": "^0.2.5",
+    "@storybook/react": "^6.5.14",
+    "@storybook/testing-library": "^0.0.13",
     "@types/node": "^18.11.10",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "@vitejs/plugin-react": "^2.2.0",
+    "babel-loader": "^8.3.0",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.5.2",
@@ -41,6 +52,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.8.0",
+    "storybook-builder-vite": "*",
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
   }
