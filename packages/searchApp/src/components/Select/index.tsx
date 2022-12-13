@@ -1,4 +1,10 @@
-import { ChangeEvent, useCallback } from 'react';
+import { useCallback } from 'react';
+import {
+  Select as MUISelect,
+  FormControl,
+  MenuItem,
+  SelectChangeEvent,
+} from '@mui/material';
 
 export type Option<T> = {
   value: T;
@@ -17,19 +23,19 @@ export const Select = <T extends string | number>({
   onChange,
 }: Props<T>) => {
   const handleChange = useCallback(
-    (e: ChangeEvent<HTMLSelectElement>) => onChange(e.currentTarget.value as T),
+    (e: SelectChangeEvent<T>) => onChange(e.target.value as T),
     [onChange],
   );
 
   return (
-    <select value={value} onChange={handleChange}>
-      {options.map(({ value, label }) => {
-        return (
-          <option value={value} key={value}>
+    <FormControl size="small">
+      <MUISelect onChange={handleChange} value={value}>
+        {options.map(({ label, value }) => (
+          <MenuItem key={label} value={value}>
             {label}
-          </option>
-        );
-      })}
-    </select>
+          </MenuItem>
+        ))}
+      </MUISelect>
+    </FormControl>
   );
 };
