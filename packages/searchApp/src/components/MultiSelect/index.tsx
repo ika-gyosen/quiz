@@ -25,14 +25,14 @@ export const MultiSelect = <T extends string | number>({
   options,
   width = 200,
 }: Props<T>) => {
-  const [selected, setSelected] = useState<T[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
 
-  const handleChange = useCallback((e: SelectChangeEvent<T[]>) => {
-    setSelected(e.target.value as T[]);
+  const handleChange = useCallback((e: SelectChangeEvent<string[]>) => {
+    setSelected(e.target.value as string[]);
   }, []);
 
   useEffect(() => {
-    onChange(options.filter(({ value }) => selected.includes(value)));
+    onChange(options.filter(({ label }) => selected.includes(label)));
   }, [onChange, options, selected]);
 
   const multiSelectWrapperStyle = css`
@@ -46,10 +46,10 @@ export const MultiSelect = <T extends string | number>({
         value={selected}
         onChange={handleChange}
         renderValue={() => selected.join()}>
-        {options.map(({ value, label }) => {
+        {options.map(({ label }) => {
           return (
-            <MenuItem key={label} value={value}>
-              <Checkbox checked={selected.includes(value)} />
+            <MenuItem key={label} value={label}>
+              <Checkbox checked={selected.includes(label)} />
               <ListItemText primary={label} />
             </MenuItem>
           );
