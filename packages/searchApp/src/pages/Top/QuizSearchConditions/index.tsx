@@ -2,6 +2,7 @@ import { css } from '@emotion/css';
 import { Select, Option } from '~/components/Select';
 import { TextField } from '~/components/TextField';
 import { MultiSelect } from '~/components/MultiSelect';
+import { TagsInput } from '~/components/TagsInput';
 import {
   difficultyOptions,
   categoryOptions,
@@ -14,15 +15,23 @@ type Props = {
   containWord: string;
   notContainWord: string;
   questionsNumber: number;
+  targetTags: Option<string>[];
+  notTargetTags: Option<string>[];
+  suggestionTags: Option<string>[];
   onChangeDifficulties: (item: Option<number>[]) => void;
   onChangeCategories: (item: Option<number>[]) => void;
   onChangeContainWord: (item: string) => void;
   onChangeNotContainWord: (item: string) => void;
   onChangeQuestionsNumber: (item: number) => void;
+  onChangeTargetTags: (items: Option<string>[]) => void;
+  onChangeNotTargetTags: (items: Option<string>[]) => void;
 };
 
 export const QuizSearchConditions = (props: Props) => {
   const {
+    targetTags,
+    notTargetTags,
+    suggestionTags,
     containWord,
     notContainWord,
     questionsNumber,
@@ -31,6 +40,8 @@ export const QuizSearchConditions = (props: Props) => {
     onChangeContainWord,
     onChangeNotContainWord,
     onChangeQuestionsNumber,
+    onChangeTargetTags,
+    onChangeNotTargetTags,
   } = props;
 
   return (
@@ -45,6 +56,22 @@ export const QuizSearchConditions = (props: Props) => {
       <div className={searchInputRowStype}>
         ジャンル:
         <MultiSelect options={categoryOptions} onChange={onChangeCategories} />
+      </div>
+      <div className={searchInputRowStype}>
+        タグ:
+        <TagsInput
+          values={targetTags}
+          options={suggestionTags}
+          onChange={onChangeTargetTags}
+        />
+      </div>
+      <div className={searchInputRowStype}>
+        除外するタグ:
+        <TagsInput
+          values={notTargetTags}
+          options={suggestionTags}
+          onChange={onChangeNotTargetTags}
+        />
       </div>
       <div className={searchInputRowStype}>
         <div>

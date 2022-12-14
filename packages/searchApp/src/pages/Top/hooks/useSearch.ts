@@ -51,6 +51,16 @@ export const useSearch = () => {
     [],
   );
 
+  const [targetTags, setTargetTags] = useState<Option<string>[]>([]);
+  const handleChangeTargetTags = useCallback((items: Option<string>[]) => {
+    setTargetTags(items);
+  }, []);
+
+  const [notTargetTags, setNotTargetTags] = useState<Option<string>[]>([]);
+  const handleChangeNotTargetTags = useCallback((items: Option<string>[]) => {
+    setNotTargetTags(items);
+  }, []);
+
   const { data, loading, error } = useGetQuestionsQuery({
     variables: {
       ...(difficulties.length === 0
@@ -59,6 +69,12 @@ export const useSearch = () => {
       ...(categories.length === 0
         ? {}
         : { categoryIds: categories.map(({ value }) => value) }),
+      ...(targetTags.length === 0
+        ? {}
+        : { targetTags: targetTags.map(({ value }) => value) }),
+      ...(notTargetTags.length === 0
+        ? {}
+        : { notTargetTags: notTargetTags.map(({ value }) => value) }),
       ...(containWord === '' ? {} : { containWord: `%${containWord}%` }),
       ...(notContainWord === ''
         ? {}
@@ -77,11 +93,21 @@ export const useSearch = () => {
       },
     );
     setQuestions(filteredQuestions);
-  }, [difficulties, categories, containWord, notContainWord, data?.questions]);
+  }, [
+    difficulties,
+    categories,
+    containWord,
+    notContainWord,
+    targetTags,
+    notTargetTags,
+    data?.questions,
+  ]);
 
   return {
     difficulties,
     categories,
+    targetTags,
+    notTargetTags,
     containWord,
     notContainWord,
     questionsNumber,
@@ -93,5 +119,7 @@ export const useSearch = () => {
     onChangeContainWord: handleChangeContainWord,
     onChangeNotContainWord: handleChangeNotContainWord,
     onChangeQuestionsNumber: handleChangeQuestionsNumber,
+    onChangeTargetTags: handleChangeTargetTags,
+    onChangeNotTargetTags: handleChangeNotTargetTags,
   };
 };

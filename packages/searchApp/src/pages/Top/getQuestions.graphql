@@ -3,6 +3,8 @@ query getQuestions(
   $categoryIds: [Int!]
   $containWord: String
   $notContainWord: String
+  $targetTags: [String!]
+  $notTargetTags: [String!]
 ) {
   questions(
     input: {
@@ -10,6 +12,8 @@ query getQuestions(
       categoryIds: $categoryIds
       containWord: $containWord
       notContainWord: $notContainWord
+      targetTags: $targetTags
+      notTargetTags: $notTargetTags
     }
   ) {
     questionId

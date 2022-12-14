@@ -25,6 +25,10 @@ export const TagsInput = <T extends string | number>({
       onChange={(_, values) => {
         onChange(values);
       }}
+      isOptionEqualToValue={(option, value) => {
+        // 選択肢と選択された値が等しいかチェックする関数。これがないとワーニングが出てしまう。
+        return option.label === value.label;
+      }}
       renderInput={(params) => <TextField {...params} variant="standard" />}
     />
   );

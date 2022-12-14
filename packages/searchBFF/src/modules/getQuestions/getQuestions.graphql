@@ -3,6 +3,50 @@ query getQuestions(
   $categoryIds: [Int!]
   $containWord: String
   $notContainWord: String
+  $targetTags: [uuid!]
+  $notTargetTags: [uuid!]
+) {
+  quiz_questions(
+    where: {
+      difficulty: { _in: $difficulties }
+      category_id: { _in: $categoryIds }
+      question: { _ilike: $containWord, _nilike: $notContainWord }
+      tags_to_questions_to_questions: {
+        tags_to_questions_to_tags: {
+          tag_id: { _in: $targetTags, _nin: $notTargetTags }
+        }
+      }
+    }
+  ) {
+    id
+    serial_number
+    difficulty
+    categories_to_questions {
+      category
+    }
+    question
+    answers_to_questions {
+      answer
+      description
+      pronunciation
+    }
+    tags_to_questions_to_questions {
+      tags_to_questions_to_tags {
+        tag
+      }
+    }
+    users_to_questions {
+      user_name
+    }
+    author
+  }
+}
+
+query getQuestionsWithOutTag(
+  $difficulties: [Int!]
+  $categoryIds: [Int!]
+  $containWord: String
+  $notContainWord: String
 ) {
   quiz_questions(
     where: {
