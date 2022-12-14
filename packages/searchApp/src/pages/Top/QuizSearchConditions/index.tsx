@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 import { Select, Option } from '~/components/Select';
 import { TextField } from '~/components/TextField';
-import { TagsInput } from '~/components/TagsInput';
+import { MultiSelect } from '~/components/MultiSelect';
 import {
   difficultyOptions,
   categoryOptions,
@@ -23,8 +23,6 @@ type Props = {
 
 export const QuizSearchConditions = (props: Props) => {
   const {
-    difficulties,
-    categories,
     containWord,
     notContainWord,
     questionsNumber,
@@ -39,19 +37,14 @@ export const QuizSearchConditions = (props: Props) => {
     <div className={searchInputWrapper}>
       <div className={searchInputRowStype}>
         難易度:
-        <TagsInput
-          values={difficulties}
+        <MultiSelect
           options={difficultyOptions}
           onChange={onChangeDifficulties}
         />
       </div>
       <div className={searchInputRowStype}>
         ジャンル:
-        <TagsInput
-          values={categories}
-          options={categoryOptions}
-          onChange={onChangeCategories}
-        />
+        <MultiSelect options={categoryOptions} onChange={onChangeCategories} />
       </div>
       <div className={searchInputRowStype}>
         <div>
@@ -65,14 +58,12 @@ export const QuizSearchConditions = (props: Props) => {
         </div>
       </div>
       <div className={searchInputRowStype}>
-        <div>
-          表示する問題数:
-          <Select
-            value={questionsNumber}
-            options={questionsNumberOptions}
-            onChange={onChangeQuestionsNumber}
-          />
-        </div>
+        表示する問題数:
+        <Select
+          value={questionsNumber}
+          options={questionsNumberOptions}
+          onChange={onChangeQuestionsNumber}
+        />
       </div>
     </div>
   );
@@ -91,5 +82,6 @@ const searchInputWrapper = css`
 const searchInputRowStype = css`
   padding: 0.5rem 0;
   display: flex;
+  align-items: center;
   gap: 1rem;
 `;
