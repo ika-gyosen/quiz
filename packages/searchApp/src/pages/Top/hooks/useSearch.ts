@@ -53,7 +53,6 @@ export const useSearch = () => {
 
   const [targetTags, setTargetTags] = useState<Option<string>[]>([]);
   const handleChangeTargetTags = useCallback((items: Option<string>[]) => {
-    console.log(items);
     setTargetTags(items);
   }, []);
 
