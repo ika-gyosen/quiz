@@ -5,33 +5,33 @@ import { useSearch } from '~/pages/Top/hooks/useSearch';
 
 export const Top = () => {
   const {
-    difficulty,
-    onChangeDifficulty,
-    category,
-    onChangeCategory,
+    difficulties,
+    categories,
     containWord,
-    onChangeContainWord,
     notContainWord,
-    onChangeNotContainWord,
     questionsNumber,
-    onChangeQuestionsNumber,
     questions,
     loading,
     error,
+    onChangeDifficulties,
+    onChangeCategories,
+    onChangeContainWord,
+    onChangeNotContainWord,
+    onChangeQuestionsNumber,
   } = useSearch();
 
   return (
     <div className={wrapper}>
       <QuizSearchConditions
-        difficulty={difficulty}
-        onChangeDifficulty={onChangeDifficulty}
-        category={category}
-        onChangeCategory={onChangeCategory}
+        difficulties={difficulties}
+        categories={categories}
         containWord={containWord}
-        onChangeContainWord={onChangeContainWord}
         notContainWord={notContainWord}
-        onChangeNotContainWord={onChangeNotContainWord}
         questionsNumber={questionsNumber}
+        onChangeDifficulties={onChangeDifficulties}
+        onChangeCategories={onChangeCategories}
+        onChangeContainWord={onChangeContainWord}
+        onChangeNotContainWord={onChangeNotContainWord}
         onChangeQuestionsNumber={onChangeQuestionsNumber}
       />
       <QuizSearchResultList
