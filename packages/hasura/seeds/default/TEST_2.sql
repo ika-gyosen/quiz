@@ -4,6 +4,20 @@ INSERT INTO quiz.users (user_id, user_name) VALUES ('b94838ad-0f2d-44a2-b4d9-1e2
 -- tagsテーブル
 INSERT INTO quiz.tags (tag_id, tag) VALUES ('a88c2605-e920-42b8-93a1-f781412feb56', 'テストタグ１');
 INSERT INTO quiz.tags (tag_id, tag) VALUES ('42e4846f-b911-4a7e-a245-e82428f070a5', 'テストタグ２');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('d975f35c-d285-42ff-b442-0b30ad8fc38b', '音楽');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('68180f79-ec2a-444e-be62-e2c2b1d157b2', 'クラシック');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('f46f8da6-cd14-44fb-b7f1-783ff2214c12', '法律');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('51828263-37d6-491f-be3f-42fb1c3c7dd7', '裁縫');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('a5b770e9-b48a-4a61-9514-44c8b69948d6', '官公庁');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('9567d98e-9690-4b93-a44f-f25ea0f948f5', 'ボウリング');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('d4238666-53ec-433b-a762-414271518858', '元素');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('072593df-641b-45fa-a832-bae852669610', '命日');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('a8c1141d-cec2-47c8-b326-d413f358131e', 'パラレル');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('419e57b6-c093-48a5-bb2e-0141216e2560', '競馬');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('1510f350-d477-4843-8c74-649c1e6f0f18', '誕生石');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('fa27197f-796a-4f32-84eb-8b2fd37887d4', '宝石');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('f6e580ce-6542-4f5d-bdca-d45c183fc753', '星座');
+INSERT INTO quiz.tags (tag_id, tag) VALUES ('dd585f3c-a147-4d8f-8f70-1276b08aaadf', '祝日');
 -- questionsテーブル
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('5e6a68da-cabc-4a4b-bd94-fd609ccd8f52', '音程が半音よりも狭い音のこと', 3, 1, '2022-12-08 06:28:19.90902+00', 1, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 8);
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('b93cee76-cb9d-4962-918d-599bdac4938c', 'ほめて与える品物や金銭です', 2, 1, '2022-12-08 06:28:19.90902+00', 2, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 3);
@@ -23,9 +37,9 @@ INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('6270f548-57d5-48fd-8f78-ef43621110e4', '虫歯の治療などに用いられる、水銀と他の金属との合金を何という？', 2, 1, '2022-12-08 06:28:19.90902+00', 16, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 1);
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('e551e81a-d247-4c40-b3aa-950c27562bbb', 'ボウリングのレーン上に描かれる７つの三角形のしるしを何という？', 2, 1, '2022-12-08 06:28:19.90902+00', 17, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 11);
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('f2689240-e5bd-418d-bb1d-0c8f3f5c8417', 'かつてマヤ文明の中心となっていた中央アメリカの半島は何半島？', 2, 1, '2022-12-08 06:28:19.90902+00', 18, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 5);
-INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('bea21f85-0674-4a97-aa22-8be7e57a8ed4', '海王星にちなんで名付けられた元素はネプツニウム、では冥王星にちなんで名付けられた元素は何？', 3, 1, '2022-12-08 06:28:19.90902+00', 19, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 1);
-INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('b3652975-5cff-4720-875b-fdcfb7f39dec', '「三国一の花嫁」というときの「三国」とは、日本、唐、とどこの国？', 3, 1, '2022-12-08 06:28:19.90902+00', 20, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 3);
-INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('0d590cbe-8541-48d5-82b0-3c0336275407', '河童忌は芥川龍之介の命日、では桜桃忌といえば誰の命日？', 2, 1, '2022-12-08 06:28:19.90902+00', 21, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 1);
+INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('bea21f85-0674-4a97-aa22-8be7e57a8ed4', '海王星にちなんで名付けられた元素はネプツニウムですが、冥王星にちなんで名付けられた元素は何でしょう？', 3, 1, '2022-12-08 06:28:19.90902+00', 19, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 1);
+INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('b3652975-5cff-4720-875b-fdcfb7f39dec', '「三国一の花嫁」というときの「三国」とは、日本、唐とどこの国？', 3, 1, '2022-12-08 06:28:19.90902+00', 20, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 3);
+INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('0d590cbe-8541-48d5-82b0-3c0336275407', '「河童忌」といえば芥川龍之介の命日ですが、「桜桃忌」といえば誰の命日でしょう？', 2, 1, '2022-12-08 06:28:19.90902+00', 21, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 2);
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('fefe2779-aca6-44c5-a143-849ca93cbba0', '競馬で、レース前に出走馬を引き回して観客に見せる場所を何という？', 2, 1, '2022-12-08 06:28:19.90902+00', 22, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 11);
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('6ad7a524-27aa-4d8c-8d17-ae43d236f05b', '信用していた人に裏切られることを、「何を飲まされる」という？', 2, 1, '2022-12-08 06:28:19.90902+00', 23, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 3);
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('71b5ce80-601b-49fa-873d-d54ac8cc1b55', '日本語では「ザクロ石」と呼ばれる、１月の誕生石は何？', 2, 1, '2022-12-08 06:28:19.90902+00', 24, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 10);
@@ -40,6 +54,24 @@ SELECT pg_catalog.setval('quiz.questions_serial_number_seq', 10, true);
 INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('a88c2605-e920-42b8-93a1-f781412feb56', '5e6a68da-cabc-4a4b-bd94-fd609ccd8f52');
 INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('a88c2605-e920-42b8-93a1-f781412feb56', 'b93cee76-cb9d-4962-918d-599bdac4938c');
 INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('42e4846f-b911-4a7e-a245-e82428f070a5', '26e299f8-3de6-4437-946c-f4d704275104');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('d975f35c-d285-42ff-b442-0b30ad8fc38b', '5e6a68da-cabc-4a4b-bd94-fd609ccd8f52');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('d975f35c-d285-42ff-b442-0b30ad8fc38b', 'a81685eb-3546-480a-8b6a-b8ba25d8d50c');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('68180f79-ec2a-444e-be62-e2c2b1d157b2', 'a81685eb-3546-480a-8b6a-b8ba25d8d50c');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('f46f8da6-cd14-44fb-b7f1-783ff2214c12', 'da75c6ba-b30f-480e-b972-665f37162ae7');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('51828263-37d6-491f-be3f-42fb1c3c7dd7', 'c44a2062-f403-47f2-8f37-2fdd37690931');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('a5b770e9-b48a-4a61-9514-44c8b69948d6', '677b4d8c-af3c-462c-844f-0dcaddfcd372');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('a8c1141d-cec2-47c8-b326-d413f358131e', '677b4d8c-af3c-462c-844f-0dcaddfcd372');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('9567d98e-9690-4b93-a44f-f25ea0f948f5', 'e551e81a-d247-4c40-b3aa-950c27562bbb');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('d4238666-53ec-433b-a762-414271518858', 'bea21f85-0674-4a97-aa22-8be7e57a8ed4');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('a8c1141d-cec2-47c8-b326-d413f358131e', 'bea21f85-0674-4a97-aa22-8be7e57a8ed4');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('072593df-641b-45fa-a832-bae852669610', '0d590cbe-8541-48d5-82b0-3c0336275407');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('a8c1141d-cec2-47c8-b326-d413f358131e', '0d590cbe-8541-48d5-82b0-3c0336275407');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('419e57b6-c093-48a5-bb2e-0141216e2560', 'fefe2779-aca6-44c5-a143-849ca93cbba0');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('1510f350-d477-4843-8c74-649c1e6f0f18', '71b5ce80-601b-49fa-873d-d54ac8cc1b55');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('fa27197f-796a-4f32-84eb-8b2fd37887d4', '71b5ce80-601b-49fa-873d-d54ac8cc1b55');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('f6e580ce-6542-4f5d-bdca-d45c183fc753', 'b759e412-38b2-49f5-9bbc-1c1118e0d59f');
+INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('dd585f3c-a147-4d8f-8f70-1276b08aaadf', '46ec1505-5fba-4a1a-8eba-abf1f601467d');
+
 -- answersテーブル
 INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('3332c8fb-7376-4807-b54c-f47cd3068d25', '5e6a68da-cabc-4a4b-bd94-fd609ccd8f52', '微分音', 'びぶんおん', NULL);
 INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('884f619a-9b5a-4f6e-aec1-6863571fce29', 'b93cee76-cb9d-4962-918d-599bdac4938c', '褒美', 'ほうび', NULL);
@@ -47,7 +79,7 @@ INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) V
 INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('d8d06658-c39f-4f00-acb1-ca97422cf7c4', 'a02f7e18-e97b-4ade-8281-12f2c9bd699a', '爆流', 'ばくりゅう', NULL);
 INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('3fc64f24-e297-4518-98d7-9e1890ad799d', 'c8c9603f-40db-4b56-ad02-b9641c007d8c', '魔界村', 'まかいむら', NULL);
 INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('06188d4f-fded-4f6e-a3de-5d1e525d70cb', 'f49b326c-c654-44d1-a492-c95bc6b75581', '友蔵', 'ともぞう', NULL);
-INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('8110566d-d6fd-4273-8c48-2bd38537aef0', 'c6a8a2a2-2c5f-4cb4-8fc0-1a0c3bc494fd', 'トルコ', NULL, NULL);
+INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('8110566d-d6fd-4273-8c48-2bd38537aef0', 'c6a8a2a2-2c5f-4cb4-8fc0-1a0c3bc494fd', 'トルコ', NULL, 'トルコ共和国');
 INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('697a5dd1-14f5-43ef-bbac-27cd041dbd5c', '526addec-d5e0-4291-a586-ce73ccb6f4a5', '群馬', 'ぐんま', NULL);
 INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('ba5bc279-68fe-46f0-91b5-95b38d1288ba', 'f9335230-c15c-4475-8526-542dd6f90049', 'オーストラリア', NULL, NULL);
 INSERT INTO quiz.answers (id, question_id, answer, pronunciation, description) VALUES ('cea4dfe1-24a8-43fc-8948-b7f106cae296', '0b08243d-69e8-4738-ad8e-bd805845efb8', '若菜集', 'わかなしゅう', NULL);
