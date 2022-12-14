@@ -17,7 +17,7 @@ export const typeDefs = gql`
     """
     除くべきタグ
     """
-    notTagetTags: [String!]
+    notTargetTags: [String!]
     """
     含んでいると検索対象となる単語
     """

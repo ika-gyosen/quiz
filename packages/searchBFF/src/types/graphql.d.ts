@@ -45,7 +45,7 @@ export type GetQuestionsInput = {
   /** 含んでいると検索対象外となる単語 */
   notContainWord?: InputMaybe<Scalars['String']>;
   /** 除くべきタグ */
-  notTagetTags?: InputMaybe<Array<Scalars['String']>>;
+  notTargetTags?: InputMaybe<Array<Scalars['String']>>;
   /** タグ */
   targetTags?: InputMaybe<Array<Scalars['String']>>;
 };

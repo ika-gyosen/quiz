@@ -9,7 +9,7 @@ export const getQuestions = async (
 
   // タグ検索を使用する場合はgetQuestionsを使用する。
   const fetcher =
-    input.targetTags || input.notTagetTags
+    input.targetTags || input.notTargetTags
       ? getQuestions
       : getQuestionsWithOutTag;
 
@@ -18,8 +18,12 @@ export const getQuestions = async (
     categoryIds: input.categoryIds,
     containWord: input.containWord,
     notContainWord: input.notContainWord,
-    targetTags: input.targetTags,
-    notTagetTags: input.notTagetTags,
+    ...(input.targetTags || input.notTargetTags
+      ? {
+          targetTags: input.targetTags,
+          notTargetTags: input.notTargetTags,
+        }
+      : {}),
   });
 
   return res.quiz_questions.map(

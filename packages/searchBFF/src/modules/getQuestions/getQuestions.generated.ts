@@ -15,7 +15,7 @@ export type GetQuestionsQueryVariables = Types.Exact<{
   targetTags?: Types.InputMaybe<
     Array<Types.Scalars['uuid']> | Types.Scalars['uuid']
   >;
-  notTagetTags?: Types.InputMaybe<
+  notTargetTags?: Types.InputMaybe<
     Array<Types.Scalars['uuid']> | Types.Scalars['uuid']
   >;
 }>;
@@ -98,7 +98,7 @@ export const GetQuestionsDocument = gql`
     $containWord: String
     $notContainWord: String
     $targetTags: [uuid!]
-    $notTagetTags: [uuid!]
+    $notTargetTags: [uuid!]
   ) {
     quiz_questions(
       where: {
@@ -107,7 +107,7 @@ export const GetQuestionsDocument = gql`
         question: { _ilike: $containWord, _nilike: $notContainWord }
         tags_to_questions_to_questions: {
           tags_to_questions_to_tags: {
-            tag_id: { _in: $targetTags, _nin: $notTagetTags }
+            tag_id: { _in: $targetTags, _nin: $notTargetTags }
           }
         }
       }
