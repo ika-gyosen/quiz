@@ -25,6 +25,9 @@ export const TagsInput = <T extends string | number>({
       onChange={(_, values) => {
         onChange(values);
       }}
+      isOptionEqualToValue={(option, value) => {
+        return option.label === value.label;
+      }}
       renderInput={(params) => <TextField {...params} variant="standard" />}
     />
   );
