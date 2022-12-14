@@ -6,6 +6,10 @@ generates:
     config:
       namingConvention:
         transformUnderscore: true
+      scalars:
+        timestmp: string
+        timestamptz: string
+        uuid: string
       enumsAsTypes: true
       maybeValue: T | undefined
     plugins:

@@ -11,8 +11,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  timestamptz: any;
-  uuid: any;
+  timestamptz: string;
+  uuid: string;
 };
 
 export type Answer = {
@@ -31,6 +31,10 @@ export type GetQuestionsInput = {
   difficulties?: InputMaybe<Array<Scalars['Int']>>;
   /** 含んでいると検索対象外となる単語 */
   notContainWord?: InputMaybe<Scalars['String']>;
+  /** 除くべきタグ */
+  notTargetTags?: InputMaybe<Array<Scalars['String']>>;
+  /** タグ */
+  targetTags?: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */

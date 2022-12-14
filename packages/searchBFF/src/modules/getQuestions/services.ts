@@ -5,12 +5,25 @@ import { getSdk } from '~/modules/getQuestions/getQuestions.generated';
 export const getQuestions = async (
   input: GetQuestionsInput,
 ): Promise<Question[]> => {
-  const { getQuestions } = getSdk(hasuraClient);
-  const res = await getQuestions({
+  const { getQuestions, getQuestionsWithOutTag } = getSdk(hasuraClient);
+
+  // タグ検索を使用する場合はgetQuestionsを使用する。
+  const fetcher =
+    input.targetTags || input.notTargetTags
+      ? getQuestions
+      : getQuestionsWithOutTag;
+
+  const res = await fetcher({
     difficulties: input.difficulties,
     categoryIds: input.categoryIds,
     containWord: input.containWord,
     notContainWord: input.notContainWord,
+    ...(input.targetTags || input.notTargetTags
+      ? {
+          targetTags: input.targetTags,
+          notTargetTags: input.notTargetTags,
+        }
+      : {}),
   });
 
   return res.quiz_questions.map(

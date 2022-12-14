@@ -5,71 +5,39 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type GetQuestionsQueryVariables = Types.Exact<{
-  difficulties?: Types.InputMaybe<
-    Array<Types.Scalars['Int']> | Types.Scalars['Int']
-  >;
-  categoryIds?: Types.InputMaybe<
-    Array<Types.Scalars['Int']> | Types.Scalars['Int']
-  >;
+  difficulties?: Types.InputMaybe<Array<Types.Scalars['Int']> | Types.Scalars['Int']>;
+  categoryIds?: Types.InputMaybe<Array<Types.Scalars['Int']> | Types.Scalars['Int']>;
   containWord?: Types.InputMaybe<Types.Scalars['String']>;
   notContainWord?: Types.InputMaybe<Types.Scalars['String']>;
+  targetTags?: Types.InputMaybe<Array<Types.Scalars['String']> | Types.Scalars['String']>;
+  notTargetTags?: Types.InputMaybe<Array<Types.Scalars['String']> | Types.Scalars['String']>;
 }>;
 
-export type GetQuestionsQuery = {
-  __typename?: 'query_root';
-  questions: Array<
-    | {
-        __typename?: 'Question';
-        questionId: string;
-        serialNumber: number;
-        difficulty?: number | undefined;
-        category?: string | undefined;
-        question: string;
-        tags?: Array<string | undefined> | undefined;
-        userName: string;
-        author?: string | undefined;
-        answers: Array<{
-          __typename?: 'Answer';
-          answer: string;
-          pronunciation?: string | undefined;
-          description?: string | undefined;
-        }>;
-      }
-    | undefined
-  >;
-};
+
+export type GetQuestionsQuery = { __typename?: 'query_root', questions: Array<{ __typename?: 'Question', questionId: string, serialNumber: number, difficulty?: number | undefined, category?: string | undefined, question: string, tags?: Array<string | undefined> | undefined, userName: string, author?: string | undefined, answers: Array<{ __typename?: 'Answer', answer: string, pronunciation?: string | undefined, description?: string | undefined }> } | undefined> };
+
 
 export const GetQuestionsDocument = gql`
-  query getQuestions(
-    $difficulties: [Int!]
-    $categoryIds: [Int!]
-    $containWord: String
-    $notContainWord: String
+    query getQuestions($difficulties: [Int!], $categoryIds: [Int!], $containWord: String, $notContainWord: String, $targetTags: [String!], $notTargetTags: [String!]) {
+  questions(
+    input: {difficulties: $difficulties, categoryIds: $categoryIds, containWord: $containWord, notContainWord: $notContainWord, targetTags: $targetTags, notTargetTags: $notTargetTags}
   ) {
-    questions(
-      input: {
-        difficulties: $difficulties
-        categoryIds: $categoryIds
-        containWord: $containWord
-        notContainWord: $notContainWord
-      }
-    ) {
-      questionId
-      serialNumber
-      difficulty
-      category
-      question
-      answers {
-        answer
-        pronunciation
-        description
-      }
-      tags
-      userName
-      author
+    questionId
+    serialNumber
+    difficulty
+    category
+    question
+    answers {
+      answer
+      pronunciation
+      description
     }
+    tags
+    userName
+    author
   }
-`;
+}
+    `;
 
 /**
  * __useGetQuestionsQuery__
@@ -87,40 +55,19 @@ export const GetQuestionsDocument = gql`
  *      categoryIds: // value for 'categoryIds'
  *      containWord: // value for 'containWord'
  *      notContainWord: // value for 'notContainWord'
+ *      targetTags: // value for 'targetTags'
+ *      notTargetTags: // value for 'notTargetTags'
  *   },
  * });
  */
-export function useGetQuestionsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    GetQuestionsQuery,
-    GetQuestionsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetQuestionsQuery, GetQuestionsQueryVariables>(
-    GetQuestionsDocument,
-    options,
-  );
-}
-export function useGetQuestionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetQuestionsQuery,
-    GetQuestionsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetQuestionsQuery, GetQuestionsQueryVariables>(
-    GetQuestionsDocument,
-    options,
-  );
-}
-export type GetQuestionsQueryHookResult = ReturnType<
-  typeof useGetQuestionsQuery
->;
-export type GetQuestionsLazyQueryHookResult = ReturnType<
-  typeof useGetQuestionsLazyQuery
->;
-export type GetQuestionsQueryResult = Apollo.QueryResult<
-  GetQuestionsQuery,
-  GetQuestionsQueryVariables
->;
+export function useGetQuestionsQuery(baseOptions?: Apollo.QueryHookOptions<GetQuestionsQuery, GetQuestionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetQuestionsQuery, GetQuestionsQueryVariables>(GetQuestionsDocument, options);
+      }
+export function useGetQuestionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetQuestionsQuery, GetQuestionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetQuestionsQuery, GetQuestionsQueryVariables>(GetQuestionsDocument, options);
+        }
+export type GetQuestionsQueryHookResult = ReturnType<typeof useGetQuestionsQuery>;
+export type GetQuestionsLazyQueryHookResult = ReturnType<typeof useGetQuestionsLazyQuery>;
+export type GetQuestionsQueryResult = Apollo.QueryResult<GetQuestionsQuery, GetQuestionsQueryVariables>;
