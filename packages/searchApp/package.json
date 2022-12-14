@@ -8,6 +8,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "codegen": "graphql-codegen",
+    "type-check": "tsc --noEmit",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

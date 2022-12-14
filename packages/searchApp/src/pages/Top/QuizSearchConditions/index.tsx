@@ -1,6 +1,7 @@
 import { css } from '@emotion/css';
-import { Select } from '~/components/Select';
+import { Select, Option } from '~/components/Select';
 import { TextField } from '~/components/TextField';
+import { TagsInput } from '~/components/TagsInput';
 import {
   difficultyOptions,
   categoryOptions,
@@ -8,51 +9,49 @@ import {
 } from '~/constants/options';
 
 type Props = {
-  difficulty: number;
-  onChangeDifficulty: (item: number) => void;
-  category: number;
-  onChangeCategory: (item: number) => void;
+  difficulties: Option<number>[];
+  categories: Option<number>[];
   containWord: string;
-  onChangeContainWord: (item: string) => void;
   notContainWord: string;
-  onChangeNotContainWord: (item: string) => void;
   questionsNumber: number;
+  onChangeDifficulties: (item: Option<number>[]) => void;
+  onChangeCategories: (item: Option<number>[]) => void;
+  onChangeContainWord: (item: string) => void;
+  onChangeNotContainWord: (item: string) => void;
   onChangeQuestionsNumber: (item: number) => void;
 };
 
 export const QuizSearchConditions = (props: Props) => {
   const {
-    difficulty,
-    onChangeDifficulty,
-    category,
-    onChangeCategory,
+    difficulties,
+    categories,
     containWord,
-    onChangeContainWord,
     notContainWord,
-    onChangeNotContainWord,
     questionsNumber,
+    onChangeDifficulties,
+    onChangeCategories,
+    onChangeContainWord,
+    onChangeNotContainWord,
     onChangeQuestionsNumber,
   } = props;
 
   return (
     <div className={searchInputWrapper}>
       <div className={searchInputRowStype}>
-        <div>
-          難易度:
-          <Select
-            value={difficulty}
-            options={difficultyOptions}
-            onChange={onChangeDifficulty}
-          />
-        </div>
-        <div>
-          ジャンル:
-          <Select
-            value={category}
-            options={categoryOptions}
-            onChange={onChangeCategory}
-          />
-        </div>
+        難易度:
+        <TagsInput
+          values={difficulties}
+          options={difficultyOptions}
+          onChange={onChangeDifficulties}
+        />
+      </div>
+      <div className={searchInputRowStype}>
+        ジャンル:
+        <TagsInput
+          values={categories}
+          options={categoryOptions}
+          onChange={onChangeCategories}
+        />
       </div>
       <div className={searchInputRowStype}>
         <div>

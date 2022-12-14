@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useGetQuestionsQuery } from '~/pages/Top/getQuestions.generated';
+import { Option } from '~/components/Select';
 
 export type Question = {
   questionId: string;
@@ -20,15 +21,15 @@ type Answer = {
 };
 
 export const useSearch = () => {
-  const [difficulty, setDifficulty] = useState(0);
-  const handleChangeDifficulty = useCallback(
-    (item: number) => setDifficulty(item),
+  const [difficulties, setDifficulties] = useState<Option<number>[]>([]);
+  const handleChangeDifficulties = useCallback(
+    (items: Option<number>[]) => setDifficulties(items),
     [],
   );
 
-  const [category, setCategory] = useState(0);
-  const handleChangeCategory = useCallback(
-    (item: number) => setCategory(item),
+  const [categories, setCategories] = useState<Option<number>[]>([]);
+  const handleChangeCategories = useCallback(
+    (items: Option<number>[]) => setCategories(items),
     [],
   );
 
@@ -52,8 +53,12 @@ export const useSearch = () => {
 
   const { data, loading, error } = useGetQuestionsQuery({
     variables: {
-      ...(difficulty === 0 ? {} : { difficulties: [difficulty] }),
-      ...(category === 0 ? {} : { categoryIds: [category] }),
+      ...(difficulties.length === 0
+        ? {}
+        : { difficulties: difficulties.map(({ value }) => value) }),
+      ...(categories.length === 0
+        ? {}
+        : { categoryIds: categories.map(({ value }) => value) }),
       ...(containWord === '' ? {} : { containWord: `%${containWord}%` }),
       ...(notContainWord === ''
         ? {}
@@ -72,21 +77,19 @@ export const useSearch = () => {
       },
     );
     setQuestions(filteredQuestions);
-  }, [difficulty, category, containWord, notContainWord, data?.questions]);
-
-  console.log(data?.questions, loading);
+  }, [difficulties, categories, containWord, notContainWord, data?.questions]);
 
   return {
-    difficulty,
-    category,
+    difficulties,
+    categories,
     containWord,
     notContainWord,
     questionsNumber,
     questions,
     loading,
     error,
-    onChangeDifficulty: handleChangeDifficulty,
-    onChangeCategory: handleChangeCategory,
+    onChangeDifficulties: handleChangeDifficulties,
+    onChangeCategories: handleChangeCategories,
     onChangeContainWord: handleChangeContainWord,
     onChangeNotContainWord: handleChangeNotContainWord,
     onChangeQuestionsNumber: handleChangeQuestionsNumber,
