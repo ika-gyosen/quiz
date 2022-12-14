@@ -44,12 +44,10 @@ export type GetQuestionsInput = {
   difficulties?: InputMaybe<Array<Scalars['Int']>>;
   /** 含んでいると検索対象外となる単語 */
   notContainWord?: InputMaybe<Scalars['String']>;
-  /** タグ(検索対象外となる) */
-  notTagetTag?: InputMaybe<Scalars['String']>;
-  /** タグ(検索対象となる) */
-  targetTag?: InputMaybe<Scalars['String']>;
-  /** タグがnullのデータを抽出結果に含めるか */
-  targetTagIsNull: Scalars['Boolean'];
+  /** 除くべきタグ */
+  notTagetTags?: InputMaybe<Array<Scalars['String']>>;
+  /** タグ */
+  targetTags?: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */

@@ -11,6 +11,14 @@ export const typeDefs = gql`
     """
     categoryIds: [Int!]
     """
+    タグ
+    """
+    targetTags: [String!]
+    """
+    除くべきタグ
+    """
+    notTagetTags: [String!]
+    """
     含んでいると検索対象となる単語
     """
     containWord: String
