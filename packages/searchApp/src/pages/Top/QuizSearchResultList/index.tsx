@@ -7,6 +7,7 @@ import {
   TableRow,
   Paper,
 } from '@mui/material';
+import { css } from '@emotion/css';
 import { ApolloError } from '@apollo/client';
 import { Question } from '~/pages/Top/hooks/useSearch';
 
@@ -41,10 +42,12 @@ export const QuizSearchResultList = (props: Props) => {
         <TableHead>
           <TableRow>
             <TableCell>No.</TableCell>
-            <TableCell>難易度</TableCell>
+            <TableCell className={difficultyTableHeadTextStyle}>
+              難易度
+            </TableCell>
             <TableCell>ジャンル</TableCell>
             <TableCell>問題</TableCell>
-            <TableCell>回答</TableCell>
+            <TableCell>解答</TableCell>
             <TableCell>読み方</TableCell>
             <TableCell>別解・備考</TableCell>
           </TableRow>
@@ -80,3 +83,7 @@ export const QuizSearchResultList = (props: Props) => {
     </TableContainer>
   );
 };
+
+const difficultyTableHeadTextStyle = css`
+  white-space: nowrap;
+`;

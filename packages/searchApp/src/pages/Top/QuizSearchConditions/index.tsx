@@ -46,18 +46,18 @@ export const QuizSearchConditions = (props: Props) => {
 
   return (
     <div className={searchInputWrapper}>
-      <div className={searchInputRowStype}>
+      <div className={searchInputRowStyle}>
         難易度:
         <MultiSelect
           options={difficultyOptions}
           onChange={onChangeDifficulties}
         />
       </div>
-      <div className={searchInputRowStype}>
+      <div className={searchInputRowStyle}>
         ジャンル:
         <MultiSelect options={categoryOptions} onChange={onChangeCategories} />
       </div>
-      <div className={searchInputRowStype}>
+      <div className={searchInputRowStyle}>
         タグ:
         <TagsInput
           values={targetTags}
@@ -65,7 +65,7 @@ export const QuizSearchConditions = (props: Props) => {
           onChange={onChangeTargetTags}
         />
       </div>
-      <div className={searchInputRowStype}>
+      <div className={searchInputRowStyle}>
         除外するタグ:
         <TagsInput
           values={notTargetTags}
@@ -73,7 +73,7 @@ export const QuizSearchConditions = (props: Props) => {
           onChange={onChangeNotTargetTags}
         />
       </div>
-      <div className={searchInputRowStype}>
+      <div className={searchInputRowStyle}>
         <div>
           問題文：
           <TextField value={containWord} onChange={onChangeContainWord} />
@@ -84,7 +84,7 @@ export const QuizSearchConditions = (props: Props) => {
           を含まない
         </div>
       </div>
-      <div className={searchInputRowStype}>
+      <div className={searchInputRowStyle}>
         表示する問題数:
         <Select
           value={questionsNumber}
@@ -106,7 +106,7 @@ const searchInputWrapper = css`
     1fr / 1fr;
 `;
 
-const searchInputRowStype = css`
+const searchInputRowStyle = css`
   padding: 0.5rem 0;
   display: flex;
   align-items: center;

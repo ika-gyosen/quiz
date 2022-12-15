@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { css } from '@emotion/css';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
@@ -17,6 +18,10 @@ export const TagsInput = <T extends string | number>({
   values,
   options,
 }: Props<T>) => {
+  const tagsInputStyle = css`
+    min-width: 200px;
+  `;
+
   return (
     <Autocomplete
       multiple
@@ -30,6 +35,7 @@ export const TagsInput = <T extends string | number>({
         return option.label === value.label;
       }}
       renderInput={(params) => <TextField {...params} variant="standard" />}
+      className={tagsInputStyle}
     />
   );
 };
