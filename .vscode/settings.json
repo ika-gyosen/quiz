@@ -9,6 +9,7 @@
   "eslint.workingDirectories": [
     { "directory": "./packages/searchApp", "changeProcessCWD": true },
     { "directory": "./packages/searchBFF", "changeProcessCWD": true },
+    { "directory": "./packages/postBFF", "changeProcessCWD": true },
     { "directory": "./packages/hasura", "changeProcessCWD": true }
   ],
   "editor.codeActionsOnSave": {

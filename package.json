@@ -6,6 +6,7 @@
   "scripts": {
     "searchApp": "yarn workspace searchapp",
     "searchBFF": "yarn workspace searchbff",
+    "postBFF": "yarn workspace postbff",
     "hasura": "yarn workspace hasura"
   },
   "repository": {

@@ -1,0 +1,31 @@
+mutation postQuestion(
+  $question: String!
+  $answer: String!
+  $pronunciation: String
+  $description: String
+  $difficulty: Int
+  $categoryId: Int
+  $userId: uuid!
+  $author: String
+) {
+  insert_quiz_questions(
+    objects: {
+      question: $question
+      answers_to_questions: {
+        data: {
+          answer: $answer
+          pronunciation: $pronunciation
+          description: $description
+        }
+      }
+      difficulty: $difficulty
+      category_id: $categoryId
+      user_id: $userId
+      author: $author
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
