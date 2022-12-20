@@ -16,6 +16,7 @@ export const addQuestion = async (
     author,
     tagIds,
   } = input;
+
   const { addQuestion, addQuestionTag } = getSdk(hasuraClient);
 
   const data = await addQuestion({

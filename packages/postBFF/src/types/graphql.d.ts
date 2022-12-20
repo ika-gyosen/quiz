@@ -54,6 +54,16 @@ export type AddQuestionResponse = {
   succeeded: Scalars['Boolean'];
 };
 
+export type AddTagInput = {
+  /** タグID */
+  tag: Scalars['String'];
+};
+
+export type AddTagResponse = {
+  __typename?: 'AddTagResponse';
+  succeeded: Scalars['Boolean'];
+};
+
 export type Answer = {
   __typename?: 'Answer';
   answer: Scalars['String'];
@@ -92,10 +102,15 @@ export type IntComparisonExp = {
 export type Mutation = {
   __typename?: 'Mutation';
   addQuestion: AddQuestionResponse;
+  addTag: AddTagResponse;
 };
 
 export type MutationAddQuestionArgs = {
   input: AddQuestionInput;
+};
+
+export type MutationAddTagArgs = {
+  input: AddTagInput;
 };
 
 export type Question = {
@@ -2552,6 +2567,8 @@ export type DirectiveResolverFn<
 export type ResolversTypes = ResolversObject<{
   AddQuestionInput: AddQuestionInput;
   AddQuestionResponse: ResolverTypeWrapper<AddQuestionResponse>;
+  AddTagInput: AddTagInput;
+  AddTagResponse: ResolverTypeWrapper<AddTagResponse>;
   Answer: ResolverTypeWrapper<Answer>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
@@ -2746,6 +2763,8 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   AddQuestionInput: AddQuestionInput;
   AddQuestionResponse: AddQuestionResponse;
+  AddTagInput: AddTagInput;
+  AddTagResponse: AddTagResponse;
   Answer: Answer;
   Boolean: Scalars['Boolean'];
   Float: Scalars['Float'];
@@ -2933,6 +2952,14 @@ export type AddQuestionResponseResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type AddTagResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['AddTagResponse'] = ResolversParentTypes['AddTagResponse'],
+> = ResolversObject<{
+  succeeded?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type AnswerResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Answer'] = ResolversParentTypes['Answer'],
@@ -2960,6 +2987,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationAddQuestionArgs, 'input'>
+  >;
+  addTag?: Resolver<
+    ResolversTypes['AddTagResponse'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddTagArgs, 'input'>
   >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -4896,6 +4929,7 @@ export interface UuidScalarConfig
 
 export type Resolvers<ContextType = any> = ResolversObject<{
   AddQuestionResponse?: AddQuestionResponseResolvers<ContextType>;
+  AddTagResponse?: AddTagResponseResolvers<ContextType>;
   Answer?: AnswerResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Question?: QuestionResolvers<ContextType>;
