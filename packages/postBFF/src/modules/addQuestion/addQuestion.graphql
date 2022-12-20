@@ -1,4 +1,4 @@
-mutation postQuestion(
+mutation addQuestion(
   $question: String!
   $answer: String!
   $pronunciation: String
@@ -18,6 +18,7 @@ mutation postQuestion(
           description: $description
         }
       }
+      answer_type_id: 1
       difficulty: $difficulty
       category_id: $categoryId
       user_id: $userId
@@ -26,6 +27,16 @@ mutation postQuestion(
   ) {
     returning {
       id
+    }
+  }
+}
+
+mutation addQuestionTag($questionId: uuid!, $tagId: uuid!) {
+  insert_quiz_tags_to_questions(
+    objects: { question_id: $questionId, tag_id: $tagId }
+  ) {
+    returning {
+      question_id
     }
   }
 }

@@ -3,7 +3,7 @@ import * as Types from '../../types/graphql.d';
 import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
 import gql from 'graphql-tag';
-export type PostQuestionMutationVariables = Types.Exact<{
+export type AddQuestionMutationVariables = Types.Exact<{
   question: Types.Scalars['String'];
   answer: Types.Scalars['String'];
   pronunciation?: Types.InputMaybe<Types.Scalars['String']>;
@@ -14,7 +14,7 @@ export type PostQuestionMutationVariables = Types.Exact<{
   author?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
-export type PostQuestionMutation = {
+export type AddQuestionMutation = {
   __typename?: 'mutation_root';
   insert_quiz_questions?: {
     __typename?: 'quiz_questions_mutation_response';
@@ -22,8 +22,24 @@ export type PostQuestionMutation = {
   } | null;
 };
 
-export const PostQuestionDocument = gql`
-  mutation postQuestion(
+export type AddQuestionTagMutationVariables = Types.Exact<{
+  questionId: Types.Scalars['uuid'];
+  tagId: Types.Scalars['uuid'];
+}>;
+
+export type AddQuestionTagMutation = {
+  __typename?: 'mutation_root';
+  insert_quiz_tags_to_questions?: {
+    __typename?: 'quiz_tags_to_questions_mutation_response';
+    returning: Array<{
+      __typename?: 'quiz_tags_to_questions';
+      question_id: string;
+    }>;
+  } | null;
+};
+
+export const AddQuestionDocument = gql`
+  mutation addQuestion(
     $question: String!
     $answer: String!
     $pronunciation: String
@@ -43,6 +59,7 @@ export const PostQuestionDocument = gql`
             description: $description
           }
         }
+        answer_type_id: 1
         difficulty: $difficulty
         category_id: $categoryId
         user_id: $userId
@@ -51,6 +68,17 @@ export const PostQuestionDocument = gql`
     ) {
       returning {
         id
+      }
+    }
+  }
+`;
+export const AddQuestionTagDocument = gql`
+  mutation addQuestionTag($questionId: uuid!, $tagId: uuid!) {
+    insert_quiz_tags_to_questions(
+      objects: { question_id: $questionId, tag_id: $tagId }
+    ) {
+      returning {
+        question_id
       }
     }
   }
@@ -73,18 +101,32 @@ export function getSdk(
   withWrapper: SdkFunctionWrapper = defaultWrapper,
 ) {
   return {
-    postQuestion(
-      variables: PostQuestionMutationVariables,
+    addQuestion(
+      variables: AddQuestionMutationVariables,
       requestHeaders?: Dom.RequestInit['headers'],
-    ): Promise<PostQuestionMutation> {
+    ): Promise<AddQuestionMutation> {
       return withWrapper(
         (wrappedRequestHeaders) =>
-          client.request<PostQuestionMutation>(
-            PostQuestionDocument,
+          client.request<AddQuestionMutation>(AddQuestionDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'addQuestion',
+        'mutation',
+      );
+    },
+    addQuestionTag(
+      variables: AddQuestionTagMutationVariables,
+      requestHeaders?: Dom.RequestInit['headers'],
+    ): Promise<AddQuestionTagMutation> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AddQuestionTagMutation>(
+            AddQuestionTagDocument,
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders },
           ),
-        'postQuestion',
+        'addQuestionTag',
         'mutation',
       );
     },

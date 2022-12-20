@@ -28,6 +28,32 @@ export type Scalars = {
   uuid: string;
 };
 
+export type AddQuestionInput = {
+  /** 解答 */
+  answer: Scalars['String'];
+  /** 出典/作問者 */
+  author?: InputMaybe<Scalars['String']>;
+  /** ジャンル */
+  categoryId?: InputMaybe<Scalars['Int']>;
+  /** 備考 */
+  description?: InputMaybe<Scalars['String']>;
+  /** 難易度 */
+  difficulty?: InputMaybe<Scalars['Int']>;
+  /** 解答の読み方(ふりがな) */
+  pronunciation?: InputMaybe<Scalars['String']>;
+  /** 問題文 */
+  question: Scalars['String'];
+  /** タグID */
+  tagIds?: InputMaybe<Array<Scalars['uuid']>>;
+  /** 投稿者 */
+  userId: Scalars['uuid'];
+};
+
+export type AddQuestionResponse = {
+  __typename?: 'AddQuestionResponse';
+  succeeded: Scalars['Boolean'];
+};
+
 export type Answer = {
   __typename?: 'Answer';
   answer: Scalars['String'];
@@ -65,35 +91,11 @@ export type IntComparisonExp = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  postQuestion: PostQuestionResponse;
+  addQuestion: AddQuestionResponse;
 };
 
-export type MutationPostQuestionArgs = {
-  input: PostQuestionInput;
-};
-
-export type PostQuestionInput = {
-  /** 解答 */
-  answer: Scalars['String'];
-  /** 出典/作問者 */
-  author?: InputMaybe<Scalars['String']>;
-  /** ジャンル */
-  categoryId?: InputMaybe<Scalars['Int']>;
-  /** 備考 */
-  description?: InputMaybe<Scalars['String']>;
-  /** 難易度 */
-  difficulty?: InputMaybe<Scalars['Int']>;
-  /** 解答の読み方(ふりがな) */
-  pronunciation?: InputMaybe<Scalars['String']>;
-  /** 問題文 */
-  question: Scalars['String'];
-  /** 投稿者 */
-  userId: Scalars['uuid'];
-};
-
-export type PostQuestionResponse = {
-  __typename?: 'PostQuestionResponse';
-  succeeded: Scalars['Boolean'];
+export type MutationAddQuestionArgs = {
+  input: AddQuestionInput;
 };
 
 export type Question = {
@@ -2548,6 +2550,8 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
+  AddQuestionInput: AddQuestionInput;
+  AddQuestionResponse: ResolverTypeWrapper<AddQuestionResponse>;
   Answer: ResolverTypeWrapper<Answer>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
@@ -2555,8 +2559,6 @@ export type ResolversTypes = ResolversObject<{
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Int_comparison_exp: IntComparisonExp;
   Mutation: ResolverTypeWrapper<Mutation>;
-  PostQuestionInput: PostQuestionInput;
-  PostQuestionResponse: ResolverTypeWrapper<PostQuestionResponse>;
   Question: ResolverTypeWrapper<Question>;
   String: ResolverTypeWrapper<Scalars['String']>;
   String_comparison_exp: StringComparisonExp;
@@ -2742,6 +2744,8 @@ export type ResolversTypes = ResolversObject<{
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
+  AddQuestionInput: AddQuestionInput;
+  AddQuestionResponse: AddQuestionResponse;
   Answer: Answer;
   Boolean: Scalars['Boolean'];
   Float: Scalars['Float'];
@@ -2749,8 +2753,6 @@ export type ResolversParentTypes = ResolversObject<{
   Int: Scalars['Int'];
   Int_comparison_exp: IntComparisonExp;
   Mutation: Mutation;
-  PostQuestionInput: PostQuestionInput;
-  PostQuestionResponse: PostQuestionResponse;
   Question: Question;
   String: Scalars['String'];
   String_comparison_exp: StringComparisonExp;
@@ -2923,6 +2925,14 @@ export type CachedDirectiveResolver<
   Args = CachedDirectiveArgs,
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
+export type AddQuestionResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['AddQuestionResponse'] = ResolversParentTypes['AddQuestionResponse'],
+> = ResolversObject<{
+  succeeded?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type AnswerResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Answer'] = ResolversParentTypes['Answer'],
@@ -2945,20 +2955,12 @@ export type MutationResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = ResolversObject<{
-  postQuestion?: Resolver<
-    ResolversTypes['PostQuestionResponse'],
+  addQuestion?: Resolver<
+    ResolversTypes['AddQuestionResponse'],
     ParentType,
     ContextType,
-    RequireFields<MutationPostQuestionArgs, 'input'>
+    RequireFields<MutationAddQuestionArgs, 'input'>
   >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type PostQuestionResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['PostQuestionResponse'] = ResolversParentTypes['PostQuestionResponse'],
-> = ResolversObject<{
-  succeeded?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -4893,9 +4895,9 @@ export interface UuidScalarConfig
 }
 
 export type Resolvers<ContextType = any> = ResolversObject<{
+  AddQuestionResponse?: AddQuestionResponseResolvers<ContextType>;
   Answer?: AnswerResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
-  PostQuestionResponse?: PostQuestionResponseResolvers<ContextType>;
   Question?: QuestionResolvers<ContextType>;
   mutation_root?: MutationRootResolvers<ContextType>;
   query_root?: QueryRootResolvers<ContextType>;

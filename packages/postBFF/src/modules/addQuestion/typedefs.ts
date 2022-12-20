@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
-  input PostQuestionInput {
+  input AddQuestionInput {
     """
     問題文
     """
@@ -34,13 +34,17 @@ export const typeDefs = gql`
     出典/作問者
     """
     author: String
+    """
+    タグID
+    """
+    tagIds: [uuid!]
   }
 
-  type PostQuestionResponse {
+  type AddQuestionResponse {
     succeeded: Boolean!
   }
 
   type Mutation {
-    postQuestion(input: PostQuestionInput!): PostQuestionResponse!
+    addQuestion(input: AddQuestionInput!): AddQuestionResponse!
   }
 `;
