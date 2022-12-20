@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "searchApp": "yarn workspace searchapp",
+    "postApp": "yarn workspace postapp",
     "searchBFF": "yarn workspace searchbff",
     "postBFF": "yarn workspace postbff",
     "hasura": "yarn workspace hasura"

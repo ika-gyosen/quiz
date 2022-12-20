@@ -1,0 +1,33 @@
+overwrite: true
+schema: 'http://localhost:8080/v1/graphql'
+documents: './src/**/*.graphql'
+generates:
+  ./src/types/graphql.d.ts:
+    config:
+      namingConvention:
+        transformUnderscore: true
+      scalars:
+        timestmp: string
+        timestamptz: string
+        uuid: string
+      enumsAsTypes: true
+      maybeValue: T | undefined
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+  ./src/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.ts
+      baseTypesPath: types/graphql.ts
+    config:
+      namingConvention:
+        transformUnderscore: true
+      enumsAsTypes: true
+      maybeValue: T | undefined
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript-operations
+      - typescript-react-apollo
