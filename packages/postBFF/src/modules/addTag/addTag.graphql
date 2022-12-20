@@ -1,0 +1,8 @@
+mutation addTag($tag: String!) {
+  insert_quiz_tags(objects: { tag: $tag }) {
+    returning {
+      tag
+      tag_id
+    }
+  }
+}

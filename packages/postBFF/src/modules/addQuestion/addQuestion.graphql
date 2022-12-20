@@ -1,0 +1,42 @@
+mutation addQuestion(
+  $question: String!
+  $answer: String!
+  $pronunciation: String
+  $description: String
+  $difficulty: Int
+  $categoryId: Int
+  $userId: uuid!
+  $author: String
+) {
+  insert_quiz_questions(
+    objects: {
+      question: $question
+      answers_to_questions: {
+        data: {
+          answer: $answer
+          pronunciation: $pronunciation
+          description: $description
+        }
+      }
+      answer_type_id: 1
+      difficulty: $difficulty
+      category_id: $categoryId
+      user_id: $userId
+      author: $author
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+mutation addQuestionTag($questionId: uuid!, $tagId: uuid!) {
+  insert_quiz_tags_to_questions(
+    objects: { question_id: $questionId, tag_id: $tagId }
+  ) {
+    returning {
+      question_id
+    }
+  }
+}

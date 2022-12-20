@@ -49,7 +49,7 @@ INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('b759e412-38b2-49f5-9bbc-1c1118e0d59f', '全天88星座のうち、名前に「へび」が付く4つの星座とは、へび座、うみへび座、みずへび座とあとひとつは何？', 2, 1, '2022-12-08 06:28:19.90902+00', 28, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 1);
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('46ec1505-5fba-4a1a-8eba-abf1f601467d', '「自然を愛し、生物をいつくしむ日」と定義されている国民の祝日は何の日？', 3, 1, '2022-12-08 06:28:19.90902+00', 29, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 10);
 INSERT INTO quiz.questions (id, question, difficulty, answer_type_id, created_at, serial_number, user_id, author, category_id) VALUES ('8f6779a4-9d3f-4c70-82a2-359d76137935', '「ブルータス、お前もか」の言葉で知られるローマの政治家は誰？', 2, 1, '2022-12-08 06:28:19.90902+00', 30, 'b94838ad-0f2d-44a2-b4d9-1e273b78995a', NULL, 5);
-SELECT pg_catalog.setval('quiz.questions_serial_number_seq', 10, true);
+SELECT pg_catalog.setval('quiz.questions_serial_number_seq', 30, true);
 -- tags_to_questionsテーブル
 INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('a88c2605-e920-42b8-93a1-f781412feb56', '5e6a68da-cabc-4a4b-bd94-fd609ccd8f52');
 INSERT INTO quiz.tags_to_questions (tag_id, question_id) VALUES ('a88c2605-e920-42b8-93a1-f781412feb56', 'b93cee76-cb9d-4962-918d-599bdac4938c');
