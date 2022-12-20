@@ -41,18 +41,15 @@ export const addQuestion = async (
   }
 
   // タグが設定されていない場合はこれで終了
-  if (tagIds?.length === 0) {
+  if (!tagIds || tagIds?.length === 0) {
     return {
       succeeded: true,
     };
   }
 
   // questionIdとtagIdのセットをtags_to_questionsテーブルに追加する
-  tagIds?.forEach((tagId) =>
-    addQuestionTag({
-      questionId,
-      tagId,
-    }),
+  Promise.all(
+    tagIds.map(async (tagId) => await addQuestionTag({ questionId, tagId })),
   );
 
   return {
