@@ -29,7 +29,7 @@ export const typeDefs = gql`
     """
     投稿者
     """
-    userId: uuid!
+    userId: String!
     """
     出典/作問者
     """
@@ -37,7 +37,7 @@ export const typeDefs = gql`
     """
     タグID
     """
-    tagIds: [uuid!]
+    tagIds: [String!]
   }
 
   type AddQuestionResponse {

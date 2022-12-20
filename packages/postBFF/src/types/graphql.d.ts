@@ -44,9 +44,9 @@ export type AddQuestionInput = {
   /** 問題文 */
   question: Scalars['String'];
   /** タグID */
-  tagIds?: InputMaybe<Array<Scalars['uuid']>>;
+  tagIds?: InputMaybe<Array<Scalars['String']>>;
   /** 投稿者 */
-  userId: Scalars['uuid'];
+  userId: Scalars['String'];
 };
 
 export type AddQuestionResponse = {
