@@ -1385,7 +1385,7 @@ export type QuizQuestions = {
   categories_to_questions?: Maybe<QuizCategories>;
   category_id?: Maybe<Scalars['Int']>;
   created_at: Scalars['timestamptz'];
-  difficulty?: Maybe<Scalars['Int']>;
+  difficulty: Scalars['Int'];
   id: Scalars['uuid'];
   question: Scalars['String'];
   serial_number: Scalars['Int'];
@@ -4058,7 +4058,7 @@ export type QuizQuestionsResolvers<
   >;
   category_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
-  difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  difficulty?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['uuid'], ParentType, ContextType>;
   question?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   serial_number?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;

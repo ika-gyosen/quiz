@@ -8,8 +8,9 @@ import {
   resolvers as addTagResolvers,
   typeDefs as addTagTypeDefs,
 } from '~/modules/addTag';
+import { baseTypeDefs } from '~/schema/base/typedefs';
 
 export const schema = makeExecutableSchema({
   resolvers: mergeResolvers([addQuestionResolvers, addTagResolvers]),
-  typeDefs: mergeTypeDefs([addQuestionTypeDefs, addTagTypeDefs]),
+  typeDefs: mergeTypeDefs([baseTypeDefs, addQuestionTypeDefs, addTagTypeDefs]),
 });
