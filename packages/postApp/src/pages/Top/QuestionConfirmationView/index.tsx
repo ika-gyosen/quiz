@@ -12,6 +12,7 @@ type Props = {
   category: Option<number> | undefined;
   tags: Option<string>[];
   author: string;
+  onSubmit: () => void;
 };
 export const QuestionConfirmationView: FC<Props> = ({
   question,
@@ -22,6 +23,7 @@ export const QuestionConfirmationView: FC<Props> = ({
   category,
   tags,
   author,
+  onSubmit,
 }) => {
   return (
     <div className={baseWrapper}>
@@ -63,12 +65,7 @@ export const QuestionConfirmationView: FC<Props> = ({
       </div>
 
       <div>
-        <Button
-          label="問題を投稿する"
-          onClick={() => {
-            return;
-          }}
-        />
+        <Button label="問題を投稿する" onClick={onSubmit} />
       </div>
     </div>
   );

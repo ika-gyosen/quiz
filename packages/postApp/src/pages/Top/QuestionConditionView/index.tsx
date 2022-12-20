@@ -5,6 +5,7 @@ import { FormControlLabel } from '~/components/FormControlLabel';
 import { Select, Option } from '~/components/Select';
 import { TagsInput } from '~/components/TagsInput';
 import { TextField } from '~/components/TextField';
+import { categoryOptions, difficultyOptions } from '~/constants/options';
 
 type Props = {
   question: string;
@@ -16,6 +17,7 @@ type Props = {
   tags: Option<string>[];
   author: string;
   inputValid: boolean;
+  suggestionTags: Option<string>[];
   onChangeQuestion: (item: string) => void;
   onChangeAnswer: (item: string) => void;
   onChangePronunciation: (item: string) => void;
@@ -35,7 +37,8 @@ export const QuestionConditionView: FC<Props> = ({
   category,
   tags,
   author,
-  // inputValid,
+  inputValid,
+  suggestionTags,
   onChangeQuestion,
   onChangeAnswer,
   onChangePronunciation,
@@ -54,7 +57,7 @@ export const QuestionConditionView: FC<Props> = ({
         control={
           <Select
             value={category?.value}
-            options={[]}
+            options={categoryOptions}
             onChange={onChangeCategory}
           />
         }
@@ -87,32 +90,30 @@ export const QuestionConditionView: FC<Props> = ({
         control={
           <Select
             value={difficulty?.value}
-            options={[]}
+            options={difficultyOptions}
             onChange={onChangeDifficulty}
           />
         }
       />
       <FormControlLabel
         label="タグ"
-        required
         control={
           <TagsInput
             values={tags}
-            options={[] as Option<string>[]}
+            options={suggestionTags}
             onChange={onChangeTags}
           />
         }
       />
       <FormControlLabel
         label="作問者・出典"
-        required
         control={<TextField value={author} onChange={onChangeAuthor} />}
       />
       <div>ここには注釈が入ります。</div>
       <div>
         <Button
           label="問題を投稿する"
-          // disabled={inputValid}
+          disabled={!inputValid}
           onClick={onClickConfirmation}
         />
       </div>

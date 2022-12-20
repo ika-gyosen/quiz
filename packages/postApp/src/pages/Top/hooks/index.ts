@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import z from 'zod';
 import { Option } from '~/components/Select';
+import { useAddQuestionMutation } from '~/pages/Top/hooks/addQuestion.generated';
 
 export const useTopPage = () => {
   const [question, setQuestion] = useState<string>('');
@@ -55,10 +56,11 @@ export const useTopPage = () => {
         answer,
         pronunciation,
         description,
-        difficulty,
-        category,
-        tags,
-        userId,
+        difficulty: difficulty?.value,
+        category: category?.value,
+        tags: tags.map(({ value }) => value),
+        // ToDo user機能が実装されていないので一旦固定値になっているが、ログインユーザーのIDにすべき。
+        userId: 'b94838ad-0f2d-44a2-b4d9-1e273b78995a',
         author,
       });
       return true;
@@ -74,15 +76,33 @@ export const useTopPage = () => {
     pronunciation,
     question,
     tags,
-    userId,
   ]);
 
   const [isConfirmation, setIsConfirmation] = useState<boolean>(false);
 
   const onClickConfirmation = () => {
-    // if (inputValid) {
-    setIsConfirmation(true);
-    // }
+    if (inputValid) {
+      setIsConfirmation(true);
+    }
+  };
+  const [startAddQuestion, { loading: _startAddQuestionLoading }] =
+    useAddQuestionMutation();
+
+  const onSubmit = async () => {
+    await startAddQuestion({
+      variables: {
+        question,
+        answer,
+        pronunciation,
+        description,
+        difficulty: difficulty?.value ?? undefined,
+        categoryId: category?.value ?? undefined,
+        // ToDo user機能が実装されていないので一旦固定値になっているが、ログインユーザーのIDにすべき。
+        userId: 'b94838ad-0f2d-44a2-b4d9-1e273b78995a',
+        author,
+      },
+    });
+    setIsConfirmation(false);
   };
 
   return {
@@ -98,6 +118,7 @@ export const useTopPage = () => {
     inputValid,
     isConfirmation,
     onClickConfirmation,
+    onSubmit,
     onChangeQuestion: handleChangeQuestion,
     onChangeAnswer: handleChangeAnswer,
     onChangePronunciation: handleChangePronunciation,

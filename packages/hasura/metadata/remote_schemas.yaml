@@ -1,3 +1,8 @@
+- name: postBFF
+  definition:
+    url: http://host.docker.internal:1112/graphql
+    timeout_seconds: 60
+    customization: {}
 - name: searchBFF
   definition:
     url: http://host.docker.internal:1111/graphql
