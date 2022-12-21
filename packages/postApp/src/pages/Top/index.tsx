@@ -25,6 +25,7 @@ export const Top = () => {
     onChangeTags,
     onChangeAuthor,
     onClickConfirmation,
+    onClickReturnPageButton,
     onSubmit,
   } = useTopPage();
 
@@ -64,6 +65,7 @@ export const Top = () => {
           category={category}
           tags={tags}
           author={author}
+          onClickReturnPageButton={onClickReturnPageButton}
           onSubmit={onSubmit}
         />
       )}

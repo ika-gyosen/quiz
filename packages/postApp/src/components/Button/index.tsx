@@ -6,6 +6,8 @@ type Props = {
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   variant?: 'outlined' | 'contained' | 'text';
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 };
 
 export const Button = ({
@@ -13,13 +15,17 @@ export const Button = ({
   onClick,
   disabled = false,
   variant = 'outlined',
+  startIcon,
+  endIcon,
 }: Props) => {
   return (
     <MUIButton
       variant={variant}
       onClick={onClick}
       color="inherit"
-      disabled={disabled}>
+      disabled={disabled}
+      startIcon={startIcon}
+      endIcon={endIcon}>
       {label}
     </MUIButton>
   );

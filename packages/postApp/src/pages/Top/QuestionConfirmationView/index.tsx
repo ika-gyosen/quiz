@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 import { FC } from 'react';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Button } from '~/components/Button';
 import { Option } from '~/components/Select';
 
@@ -12,6 +13,7 @@ type Props = {
   category: Option<number> | undefined;
   tags: Option<string>[];
   author: string;
+  onClickReturnPageButton: () => void;
   onSubmit: () => void;
 };
 export const QuestionConfirmationView: FC<Props> = ({
@@ -23,6 +25,7 @@ export const QuestionConfirmationView: FC<Props> = ({
   category,
   tags,
   author,
+  onClickReturnPageButton,
   onSubmit,
 }) => {
   return (
@@ -63,8 +66,13 @@ export const QuestionConfirmationView: FC<Props> = ({
         <div className={labelStyle}>作問者・出典</div>
         <div>{author ?? ''}</div>
       </div>
-
-      <div>
+      <div className={buttonsWrapper}>
+        <Button
+          label="入力内容を修正する"
+          onClick={onClickReturnPageButton}
+          variant="text"
+          startIcon={<ArrowBackIcon />}
+        />
         <Button label="問題を投稿する" onClick={onSubmit} />
       </div>
     </div>
@@ -77,4 +85,12 @@ const fieldStyle = css``;
 
 const labelStyle = css`
   font-weight: bold;
+`;
+
+const buttonsWrapper = css`
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  gap: 20px;
+  margin: 20px 40px;
 `;
