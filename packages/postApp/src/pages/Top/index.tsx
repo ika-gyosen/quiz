@@ -3,6 +3,7 @@ import { useTopPage } from '~/pages/Top/hooks';
 import { useTags } from '~/pages/Top/hooks/useTags';
 import { QuestionConditionView } from '~/pages/Top/QuestionConditionView';
 import { QuestionConfirmationView } from '~/pages/Top/QuestionConfirmationView';
+import { QuestionPostCompletedView } from '~/pages/Top/QuestionPostCompletedView';
 
 export const Top = () => {
   const {
@@ -16,6 +17,7 @@ export const Top = () => {
     author,
     inputValid,
     isConfirmation,
+    currentStep,
     onChangeQuestion,
     onChangeAnswer,
     onChangePronunciation,
@@ -33,7 +35,7 @@ export const Top = () => {
 
   return (
     <div className={wrapper}>
-      {!isConfirmation ? (
+      {currentStep === 'input' ? (
         <QuestionConditionView
           question={question}
           answer={answer}
@@ -55,7 +57,7 @@ export const Top = () => {
           inputValid={inputValid}
           onClickConfirmation={onClickConfirmation}
         />
-      ) : (
+      ) : currentStep === 'confirmation' ? (
         <QuestionConfirmationView
           question={question}
           answer={answer}
@@ -68,6 +70,8 @@ export const Top = () => {
           onClickReturnPageButton={onClickReturnPageButton}
           onSubmit={onSubmit}
         />
+      ) : (
+        <QuestionPostCompletedView />
       )}
     </div>
   );

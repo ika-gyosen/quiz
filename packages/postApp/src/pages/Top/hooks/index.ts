@@ -3,6 +3,8 @@ import z from 'zod';
 import { Option } from '~/components/Select';
 import { useAddQuestionMutation } from '~/pages/Top/hooks/addQuestion.generated';
 
+export type CurrentStep = 'input' | 'confirmation' | 'completed';
+
 export const useTopPage = () => {
   const [question, setQuestion] = useState<string>('');
   const handleChangeQuestion = useCallback((item: string) => {
@@ -80,14 +82,16 @@ export const useTopPage = () => {
 
   const [isConfirmation, setIsConfirmation] = useState<boolean>(false);
 
+  const [currentStep, setCurrentStep] = useState<CurrentStep>('input');
+
   const onClickConfirmation = () => {
     if (inputValid) {
-      setIsConfirmation(true);
+      setCurrentStep('confirmation');
     }
   };
 
   const handleClickReturnPageButton = () => {
-    setIsConfirmation(false);
+    setCurrentStep('input');
   };
 
   const [startAddQuestion, { loading: _startAddQuestionLoading }] =
@@ -107,7 +111,7 @@ export const useTopPage = () => {
         author,
       },
     });
-    setIsConfirmation(false);
+    setCurrentStep('completed');
   };
 
   return {
@@ -122,6 +126,7 @@ export const useTopPage = () => {
     author,
     inputValid,
     isConfirmation,
+    currentStep,
     onClickConfirmation,
     onClickReturnPageButton: handleClickReturnPageButton,
     onSubmit,
