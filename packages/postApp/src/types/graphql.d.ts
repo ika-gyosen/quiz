@@ -15,6 +15,42 @@ export type Scalars = {
   uuid: string;
 };
 
+export type AddQuestionInput = {
+  /** 解答 */
+  answer: Scalars['String'];
+  /** 出典/作問者 */
+  author?: InputMaybe<Scalars['String']>;
+  /** ジャンル */
+  categoryId?: InputMaybe<Scalars['Int']>;
+  /** 備考 */
+  description?: InputMaybe<Scalars['String']>;
+  /** 難易度 */
+  difficulty?: InputMaybe<Scalars['Int']>;
+  /** 解答の読み方(ふりがな) */
+  pronunciation?: InputMaybe<Scalars['String']>;
+  /** 問題文 */
+  question: Scalars['String'];
+  /** タグID */
+  tagIds?: InputMaybe<Array<Scalars['String']>>;
+  /** 投稿者 */
+  userId: Scalars['String'];
+};
+
+export type AddQuestionResponse = {
+  __typename?: 'AddQuestionResponse';
+  succeeded: Scalars['Boolean'];
+};
+
+export type AddTagInput = {
+  /** タグID */
+  tag: Scalars['String'];
+};
+
+export type AddTagResponse = {
+  __typename?: 'AddTagResponse';
+  succeeded: Scalars['Boolean'];
+};
+
 export type Answer = {
   __typename?: 'Answer';
   answer: Scalars['String'];
@@ -106,6 +142,9 @@ export type CursorOrdering =
 /** mutation root */
 export type MutationRoot = {
   __typename?: 'mutation_root';
+  _dummy?: Maybe<Scalars['Boolean']>;
+  addQuestion: AddQuestionResponse;
+  addTag: AddTagResponse;
   /** delete data from the table: "quiz.answer_types" */
   delete_quiz_answer_types?: Maybe<QuizAnswerTypesMutationResponse>;
   /** delete single row from the table: "quiz.answer_types" */
@@ -204,6 +243,18 @@ export type MutationRoot = {
   update_quiz_users_by_pk?: Maybe<QuizUsers>;
   /** update multiples rows of table: "quiz.users" */
   update_quiz_users_many?: Maybe<Array<Maybe<QuizUsersMutationResponse>>>;
+};
+
+
+/** mutation root */
+export type MutationRootAddQuestionArgs = {
+  input: AddQuestionInput;
+};
+
+
+/** mutation root */
+export type MutationRootAddTagArgs = {
+  input: AddTagInput;
 };
 
 
@@ -552,6 +603,7 @@ export type OrderBy =
 
 export type QueryRoot = {
   __typename?: 'query_root';
+  _dummy?: Maybe<Scalars['Boolean']>;
   questions: Array<Maybe<Question>>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
@@ -2199,6 +2251,7 @@ export type QuizUsersUpdates = {
 
 export type SubscriptionRoot = {
   __typename?: 'subscription_root';
+  _dummy?: Maybe<Scalars['Boolean']>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
   /** fetch aggregated fields from the table: "quiz.answer_types" */

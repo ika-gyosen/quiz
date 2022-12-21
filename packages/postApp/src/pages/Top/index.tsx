@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 import { useTopPage } from '~/pages/Top/hooks';
+import { useTags } from '~/pages/Top/hooks/useTags';
 import { QuestionConditionView } from '~/pages/Top/QuestionConditionView';
 import { QuestionConfirmationView } from '~/pages/Top/QuestionConfirmationView';
 
@@ -24,7 +25,11 @@ export const Top = () => {
     onChangeTags,
     onChangeAuthor,
     onClickConfirmation,
+    onSubmit,
   } = useTopPage();
+
+  const { suggestionTags } = useTags();
+
   return (
     <div className={wrapper}>
       {!isConfirmation ? (
@@ -37,6 +42,7 @@ export const Top = () => {
           category={category}
           tags={tags}
           author={author}
+          suggestionTags={suggestionTags}
           onChangeQuestion={onChangeQuestion}
           onChangeAnswer={onChangeAnswer}
           onChangePronunciation={onChangePronunciation}
@@ -58,6 +64,7 @@ export const Top = () => {
           category={category}
           tags={tags}
           author={author}
+          onSubmit={onSubmit}
         />
       )}
     </div>

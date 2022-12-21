@@ -25,6 +25,7 @@ export const TagsInput = <T extends string | number>({
   return (
     <Autocomplete
       multiple
+      sx={{ width: '20rem' }}
       value={values}
       options={options}
       onChange={(_, values) => {

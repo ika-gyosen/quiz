@@ -30,7 +30,10 @@ export const Select = <T extends string | number>({
 
   return (
     <FormControl size="small">
-      <MUISelect onChange={handleChange} value={value}>
+      <MUISelect
+        onChange={handleChange}
+        value={value ?? ''}
+        sx={{ height: '2.4rem', width: '20rem' }}>
         {options.map(({ label, value }) => (
           <MenuItem key={label} value={value}>
             {label}
