@@ -85,6 +85,11 @@ export const useTopPage = () => {
       setIsConfirmation(true);
     }
   };
+
+  const handleClickReturnPageButton = () => {
+    setIsConfirmation(false);
+  };
+
   const [startAddQuestion, { loading: _startAddQuestionLoading }] =
     useAddQuestionMutation();
 
@@ -118,6 +123,7 @@ export const useTopPage = () => {
     inputValid,
     isConfirmation,
     onClickConfirmation,
+    onClickReturnPageButton: handleClickReturnPageButton,
     onSubmit,
     onChangeQuestion: handleChangeQuestion,
     onChangeAnswer: handleChangeAnswer,

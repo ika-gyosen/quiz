@@ -112,7 +112,7 @@ export const QuestionConditionView: FC<Props> = ({
       <div>ここには注釈が入ります。</div>
       <div>
         <Button
-          label="問題を投稿する"
+          label="入力内容を確認する"
           disabled={!inputValid}
           onClick={onClickConfirmation}
         />
