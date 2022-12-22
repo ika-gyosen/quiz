@@ -32,27 +32,27 @@ export const QuestionConfirmationView: FC<Props> = ({
     <div className={baseWrapper}>
       <div className={fieldStyle}>
         <div className={labelStyle}>カテゴリ</div>
-        <div>{category?.label ?? ''}</div>
+        <div className={userInputStyle}>{category?.label ?? ''}</div>
       </div>
       <div className={fieldStyle}>
         <div className={labelStyle}>問題</div>
-        <div>{question ?? ''}</div>
+        <div className={userInputStyle}>{question ?? ''}</div>
       </div>
       <div className={fieldStyle}>
         <div className={labelStyle}>解答</div>
-        <div>{answer ?? ''}</div>
+        <div className={userInputStyle}>{answer ?? ''}</div>
       </div>
       <div className={fieldStyle}>
         <div className={labelStyle}>よみがな</div>
-        <div>{pronunciation ?? ''}</div>
+        <div className={userInputStyle}>{pronunciation ?? ''}</div>
       </div>
       <div className={fieldStyle}>
         <div className={labelStyle}>備考・別解</div>
-        <div>{description ?? ''}</div>
+        <div className={userInputStyle}>{description ?? ''}</div>
       </div>
       <div className={fieldStyle}>
         <div className={labelStyle}>難易度</div>
-        <div>{difficulty?.label ?? ''}</div>
+        <div className={userInputStyle}>{difficulty?.label ?? ''}</div>
       </div>
       <div className={fieldStyle}>
         <div className={labelStyle}>タグ</div>
@@ -64,7 +64,7 @@ export const QuestionConfirmationView: FC<Props> = ({
       </div>
       <div className={fieldStyle}>
         <div className={labelStyle}>作問者・出典</div>
-        <div>{author ?? ''}</div>
+        <div className={userInputStyle}>{author ?? ''}</div>
       </div>
       <div className={buttonsWrapper}>
         <Button
@@ -81,10 +81,16 @@ export const QuestionConfirmationView: FC<Props> = ({
 
 const baseWrapper = css``;
 
-const fieldStyle = css``;
+const fieldStyle = css`
+  margin: 16px 8px;
+`;
 
 const labelStyle = css`
   font-weight: bold;
+`;
+
+const userInputStyle = css`
+  font-size: 1.3rem;
 `;
 
 const buttonsWrapper = css`
