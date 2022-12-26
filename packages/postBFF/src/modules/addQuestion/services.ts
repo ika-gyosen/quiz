@@ -1,10 +1,10 @@
-import { AddQuestionInput, AddQuestionResponse } from '~/types/graphql';
+import { AddQuestionInput, AddQuestionResult } from '~/types/graphql';
 import { getSdk } from '~/modules/addQuestion/addQuestion.generated';
 import { hasuraClient } from '~/api/graphql';
 
 export const addQuestion = async (
   input: AddQuestionInput,
-): Promise<AddQuestionResponse> => {
+): Promise<AddQuestionResult> => {
   const {
     question,
     answer,
@@ -33,17 +33,20 @@ export const addQuestion = async (
   // 登録したクイズのquestionIdを取得する
   const questionId = data.insert_quiz_questions?.returning[0].id;
 
-  // questionIdが得られなかった場合は失敗とする
+  // questionIdが得られなかった場合はエラーを返す
   if (!questionId) {
     return {
-      succeeded: false,
+      __typename: 'AddQuestionFailResponse',
+      message: 'エラーが発生しました。',
     };
   }
 
-  // タグが設定されていない場合はこれで終了
+  // タグが設定されていない場合はタグの追加を行わない
   if (!tagIds || tagIds?.length === 0) {
     return {
-      succeeded: true,
+      __typename: 'AddQuestionSuccessResponse',
+      id: questionId,
+      succeeded: true, // TODO 生成された型定義にsucceededが含まれているので記述しているが、本来は存在しないはずなので、型定義を修正したのち削除する
     };
   }
 
@@ -53,6 +56,8 @@ export const addQuestion = async (
   );
 
   return {
-    succeeded: true,
+    __typename: 'AddQuestionSuccessResponse',
+    id: questionId,
+    succeeded: true, // TODO 生成された型定義にsucceededが含まれているので記述しているが、本来は存在しないはずなので、型定義を修正したのち削除する
   };
 };

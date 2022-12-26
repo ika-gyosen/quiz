@@ -40,11 +40,23 @@ export const typeDefs = gql`
     tagIds: [String!]
   }
 
-  type AddQuestionResponse {
-    succeeded: Boolean!
+  """
+  成功レスポンス: 新しく追加された問題のIDを返す
+  """
+  type AddQuestionSuccessResponse {
+    id: String!
   }
 
+  """
+  エラーレスポンス: エラーメッセージを返す
+  """
+  type AddQuestionFailResponse {
+    message: String!
+  }
+
+  union AddQuestionResult = AddQuestionSuccessResponse | AddQuestionFailResponse
+
   type Mutation {
-    addQuestion(input: AddQuestionInput!): AddQuestionResponse!
+    addQuestion(input: AddQuestionInput!): AddQuestionResult!
   }
 `;

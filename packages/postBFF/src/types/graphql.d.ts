@@ -14,6 +14,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
   [P in K]-?: NonNullable<T[P]>;
 };
@@ -26,6 +27,12 @@ export type Scalars = {
   Float: number;
   timestamptz: string;
   uuid: string;
+};
+
+/** エラーレスポンス: エラーメッセージを返す */
+export type AddQuestionFailResponse = {
+  __typename?: 'AddQuestionFailResponse';
+  message: Scalars['String'];
 };
 
 export type AddQuestionInput = {
@@ -49,8 +56,14 @@ export type AddQuestionInput = {
   userId: Scalars['String'];
 };
 
-export type AddQuestionResponse = {
-  __typename?: 'AddQuestionResponse';
+export type AddQuestionResult =
+  | AddQuestionFailResponse
+  | AddQuestionSuccessResponse;
+
+/** 成功レスポンス: succeededを返す */
+export type AddQuestionSuccessResponse = {
+  __typename?: 'AddQuestionSuccessResponse';
+  id: Scalars['String'];
   succeeded: Scalars['Boolean'];
 };
 
@@ -101,7 +114,8 @@ export type IntComparisonExp = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addQuestion: AddQuestionResponse;
+  _dummy?: Maybe<Scalars['Boolean']>;
+  addQuestion: AddQuestionResult;
   addTag: AddTagResponse;
 };
 
@@ -111,6 +125,11 @@ export type MutationAddQuestionArgs = {
 
 export type MutationAddTagArgs = {
   input: AddTagInput;
+};
+
+export type Query = {
+  __typename?: 'Query';
+  _dummy?: Maybe<Scalars['Boolean']>;
 };
 
 export type Question = {
@@ -159,6 +178,11 @@ export type StringComparisonExp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  _dummy?: Maybe<Scalars['Boolean']>;
+};
+
 /** ordering argument of a cursor */
 export type CursorOrdering =
   /** ascending ordering of the cursor */
@@ -169,6 +193,9 @@ export type CursorOrdering =
 /** mutation root */
 export type MutationRoot = {
   __typename?: 'mutation_root';
+  _dummy?: Maybe<Scalars['Boolean']>;
+  addQuestion: AddQuestionResult;
+  addTag: AddTagResponse;
   /** delete data from the table: "quiz.answer_types" */
   delete_quiz_answer_types?: Maybe<QuizAnswerTypesMutationResponse>;
   /** delete single row from the table: "quiz.answer_types" */
@@ -275,6 +302,16 @@ export type MutationRoot = {
   update_quiz_users_by_pk?: Maybe<QuizUsers>;
   /** update multiples rows of table: "quiz.users" */
   update_quiz_users_many?: Maybe<Array<Maybe<QuizUsersMutationResponse>>>;
+};
+
+/** mutation root */
+export type MutationRootAddQuestionArgs = {
+  input: AddQuestionInput;
+};
+
+/** mutation root */
+export type MutationRootAddTagArgs = {
+  input: AddTagInput;
 };
 
 /** mutation root */
@@ -574,6 +611,7 @@ export type OrderBy =
 
 export type QueryRoot = {
   __typename?: 'query_root';
+  _dummy?: Maybe<Scalars['Boolean']>;
   questions: Array<Maybe<Question>>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
@@ -1385,7 +1423,7 @@ export type QuizQuestions = {
   categories_to_questions?: Maybe<QuizCategories>;
   category_id?: Maybe<Scalars['Int']>;
   created_at: Scalars['timestamptz'];
-  difficulty: Scalars['Int'];
+  difficulty?: Maybe<Scalars['Int']>;
   id: Scalars['uuid'];
   question: Scalars['String'];
   serial_number: Scalars['Int'];
@@ -2188,6 +2226,7 @@ export type QuizUsersUpdates = {
 
 export type SubscriptionRoot = {
   __typename?: 'subscription_root';
+  _dummy?: Maybe<Scalars['Boolean']>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
   /** fetch aggregated fields from the table: "quiz.answer_types" */
@@ -2565,8 +2604,12 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
+  AddQuestionFailResponse: ResolverTypeWrapper<AddQuestionFailResponse>;
   AddQuestionInput: AddQuestionInput;
-  AddQuestionResponse: ResolverTypeWrapper<AddQuestionResponse>;
+  AddQuestionResult:
+    | ResolversTypes['AddQuestionFailResponse']
+    | ResolversTypes['AddQuestionSuccessResponse'];
+  AddQuestionSuccessResponse: ResolverTypeWrapper<AddQuestionSuccessResponse>;
   AddTagInput: AddTagInput;
   AddTagResponse: ResolverTypeWrapper<AddTagResponse>;
   Answer: ResolverTypeWrapper<Answer>;
@@ -2575,10 +2618,16 @@ export type ResolversTypes = ResolversObject<{
   GetQuestionsInput: GetQuestionsInput;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Int_comparison_exp: IntComparisonExp;
-  Mutation: ResolverTypeWrapper<Mutation>;
+  Mutation: ResolverTypeWrapper<
+    Omit<Mutation, 'addQuestion'> & {
+      addQuestion: ResolversTypes['AddQuestionResult'];
+    }
+  >;
+  Query: ResolverTypeWrapper<Query>;
   Question: ResolverTypeWrapper<Question>;
   String: ResolverTypeWrapper<Scalars['String']>;
   String_comparison_exp: StringComparisonExp;
+  Subscription: ResolverTypeWrapper<Subscription>;
   cursor_ordering: CursorOrdering;
   mutation_root: ResolverTypeWrapper<{}>;
   order_by: OrderBy;
@@ -2761,8 +2810,12 @@ export type ResolversTypes = ResolversObject<{
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
+  AddQuestionFailResponse: AddQuestionFailResponse;
   AddQuestionInput: AddQuestionInput;
-  AddQuestionResponse: AddQuestionResponse;
+  AddQuestionResult:
+    | ResolversParentTypes['AddQuestionFailResponse']
+    | ResolversParentTypes['AddQuestionSuccessResponse'];
+  AddQuestionSuccessResponse: AddQuestionSuccessResponse;
   AddTagInput: AddTagInput;
   AddTagResponse: AddTagResponse;
   Answer: Answer;
@@ -2771,10 +2824,14 @@ export type ResolversParentTypes = ResolversObject<{
   GetQuestionsInput: GetQuestionsInput;
   Int: Scalars['Int'];
   Int_comparison_exp: IntComparisonExp;
-  Mutation: Mutation;
+  Mutation: Omit<Mutation, 'addQuestion'> & {
+    addQuestion: ResolversParentTypes['AddQuestionResult'];
+  };
+  Query: Query;
   Question: Question;
   String: Scalars['String'];
   String_comparison_exp: StringComparisonExp;
+  Subscription: Subscription;
   mutation_root: {};
   query_root: {};
   quiz_answer_types: QuizAnswerTypes;
@@ -2944,10 +3001,30 @@ export type CachedDirectiveResolver<
   Args = CachedDirectiveArgs,
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type AddQuestionResponseResolvers<
+export type AddQuestionFailResponseResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['AddQuestionResponse'] = ResolversParentTypes['AddQuestionResponse'],
+  ParentType extends ResolversParentTypes['AddQuestionFailResponse'] = ResolversParentTypes['AddQuestionFailResponse'],
 > = ResolversObject<{
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type AddQuestionResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['AddQuestionResult'] = ResolversParentTypes['AddQuestionResult'],
+> = ResolversObject<{
+  __resolveType: TypeResolveFn<
+    'AddQuestionFailResponse' | 'AddQuestionSuccessResponse',
+    ParentType,
+    ContextType
+  >;
+}>;
+
+export type AddQuestionSuccessResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['AddQuestionSuccessResponse'] = ResolversParentTypes['AddQuestionSuccessResponse'],
+> = ResolversObject<{
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   succeeded?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -2982,8 +3059,9 @@ export type MutationResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = ResolversObject<{
+  _dummy?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   addQuestion?: Resolver<
-    ResolversTypes['AddQuestionResponse'],
+    ResolversTypes['AddQuestionResult'],
     ParentType,
     ContextType,
     RequireFields<MutationAddQuestionArgs, 'input'>
@@ -2994,6 +3072,14 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationAddTagArgs, 'input'>
   >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type QueryResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
+> = ResolversObject<{
+  _dummy?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -3017,10 +3103,31 @@ export type QuestionResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type SubscriptionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
+> = ResolversObject<{
+  _dummy?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type MutationRootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['mutation_root'] = ResolversParentTypes['mutation_root'],
 > = ResolversObject<{
+  _dummy?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  addQuestion?: Resolver<
+    ResolversTypes['AddQuestionResult'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationRootAddQuestionArgs, 'input'>
+  >;
+  addTag?: Resolver<
+    ResolversTypes['AddTagResponse'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationRootAddTagArgs, 'input'>
+  >;
   delete_quiz_answer_types?: Resolver<
     Maybe<ResolversTypes['quiz_answer_types_mutation_response']>,
     ParentType,
@@ -3326,6 +3433,7 @@ export type QueryRootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['query_root'] = ResolversParentTypes['query_root'],
 > = ResolversObject<{
+  _dummy?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   questions?: Resolver<
     Array<Maybe<ResolversTypes['Question']>>,
     ParentType,
@@ -4058,7 +4166,7 @@ export type QuizQuestionsResolvers<
   >;
   category_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
-  difficulty?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['uuid'], ParentType, ContextType>;
   question?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   serial_number?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -4701,6 +4809,12 @@ export type SubscriptionRootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['subscription_root'] = ResolversParentTypes['subscription_root'],
 > = ResolversObject<{
+  _dummy?: SubscriptionResolver<
+    Maybe<ResolversTypes['Boolean']>,
+    '_dummy',
+    ParentType,
+    ContextType
+  >;
   quiz_answer_types?: SubscriptionResolver<
     Array<ResolversTypes['quiz_answer_types']>,
     'quiz_answer_types',
@@ -4928,11 +5042,15 @@ export interface UuidScalarConfig
 }
 
 export type Resolvers<ContextType = any> = ResolversObject<{
-  AddQuestionResponse?: AddQuestionResponseResolvers<ContextType>;
+  AddQuestionFailResponse?: AddQuestionFailResponseResolvers<ContextType>;
+  AddQuestionResult?: AddQuestionResultResolvers<ContextType>;
+  AddQuestionSuccessResponse?: AddQuestionSuccessResponseResolvers<ContextType>;
   AddTagResponse?: AddTagResponseResolvers<ContextType>;
   Answer?: AnswerResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Query?: QueryResolvers<ContextType>;
   Question?: QuestionResolvers<ContextType>;
+  Subscription?: SubscriptionResolvers<ContextType>;
   mutation_root?: MutationRootResolvers<ContextType>;
   query_root?: QueryRootResolvers<ContextType>;
   quiz_answer_types?: QuizAnswerTypesResolvers<ContextType>;
