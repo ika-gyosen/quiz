@@ -20,6 +20,7 @@ query getQuestions(
     serialNumber
     difficulty
     category
+    subCategory
     question
     answers {
       answer

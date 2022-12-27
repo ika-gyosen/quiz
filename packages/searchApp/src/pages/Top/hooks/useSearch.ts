@@ -7,6 +7,7 @@ export type Question = {
   serialNumber: number;
   difficulty?: number;
   category?: string;
+  subCategory?: string;
   question: string;
   answers: Answer[];
   tags?: string[];
