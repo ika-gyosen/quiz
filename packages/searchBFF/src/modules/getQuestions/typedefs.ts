@@ -39,6 +39,7 @@ export const typeDefs = gql`
     serialNumber: Int!
     difficulty: Int
     category: String
+    subCategory: String
     question: String!
     answers: [Answer!]!
     tags: [String]

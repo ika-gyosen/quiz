@@ -21,8 +21,11 @@ query getQuestions(
     id
     serial_number
     difficulty
-    categories_to_questions {
-      category
+    sub_categories_to_questions {
+      sub_category
+      categories_to_sub_categories {
+        category
+      }
     }
     question
     answers_to_questions {
@@ -58,8 +61,11 @@ query getQuestionsWithOutTag(
     id
     serial_number
     difficulty
-    categories_to_questions {
-      category
+    sub_categories_to_questions {
+      sub_category
+      categories_to_sub_categories {
+        category
+      }
     }
     question
     answers_to_questions {

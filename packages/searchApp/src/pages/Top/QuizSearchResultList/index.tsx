@@ -64,6 +64,8 @@ export const QuizSearchResultList = (props: Props) => {
               </TableCell>
               <TableCell component="th" scope="row">
                 {question?.category ?? ''}
+                <br />
+                {question.subCategory ?? ''}
               </TableCell>
               <TableCell component="th" scope="row"></TableCell>
               <TableCell component="th" scope="row">
