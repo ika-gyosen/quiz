@@ -26,12 +26,16 @@ export type GetQuestionsQuery = {
     __typename?: 'quiz_questions';
     id: string;
     serial_number: number;
-    difficulty: number;
+    difficulty?: number | null;
     question: string;
     author?: string | null;
-    categories_to_questions?: {
-      __typename?: 'quiz_categories';
-      category: string;
+    sub_categories_to_questions?: {
+      __typename?: 'quiz_sub_categories';
+      sub_category: string;
+      categories_to_sub_categories?: {
+        __typename?: 'quiz_categories';
+        category: string;
+      } | null;
     } | null;
     answers_to_questions: Array<{
       __typename?: 'quiz_answers';
@@ -67,12 +71,16 @@ export type GetQuestionsWithOutTagQuery = {
     __typename?: 'quiz_questions';
     id: string;
     serial_number: number;
-    difficulty: number;
+    difficulty?: number | null;
     question: string;
     author?: string | null;
-    categories_to_questions?: {
-      __typename?: 'quiz_categories';
-      category: string;
+    sub_categories_to_questions?: {
+      __typename?: 'quiz_sub_categories';
+      sub_category: string;
+      categories_to_sub_categories?: {
+        __typename?: 'quiz_categories';
+        category: string;
+      } | null;
     } | null;
     answers_to_questions: Array<{
       __typename?: 'quiz_answers';
@@ -115,8 +123,11 @@ export const GetQuestionsDocument = gql`
       id
       serial_number
       difficulty
-      categories_to_questions {
-        category
+      sub_categories_to_questions {
+        sub_category
+        categories_to_sub_categories {
+          category
+        }
       }
       question
       answers_to_questions {
@@ -153,8 +164,11 @@ export const GetQuestionsWithOutTagDocument = gql`
       id
       serial_number
       difficulty
-      categories_to_questions {
-        category
+      sub_categories_to_questions {
+        sub_category
+        categories_to_sub_categories {
+          category
+        }
       }
       question
       answers_to_questions {

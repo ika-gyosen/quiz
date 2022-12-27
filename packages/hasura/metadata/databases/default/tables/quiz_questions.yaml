@@ -11,9 +11,15 @@ object_relationships:
         remote_table:
           name: answer_types
           schema: quiz
-  - name: categories_to_questions
+  - name: sub_categories_to_questions
     using:
-      foreign_key_constraint_on: category_id
+      manual_configuration:
+        column_mapping:
+          category_id: sub_category_id
+        insertion_order: null
+        remote_table:
+          name: sub_categories
+          schema: quiz
   - name: users_to_questions
     using:
       foreign_key_constraint_on: user_id

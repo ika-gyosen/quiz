@@ -31,7 +31,7 @@ export const getQuestions = async (
       id,
       serial_number,
       difficulty,
-      categories_to_questions,
+      sub_categories_to_questions,
       question,
       answers_to_questions,
       tags_to_questions_to_questions,
@@ -41,8 +41,11 @@ export const getQuestions = async (
       return {
         questionId: id,
         serialNumber: serial_number,
-        difficulty: difficulty ?? '',
-        category: categories_to_questions?.category ?? '',
+        difficulty: difficulty,
+        category:
+          sub_categories_to_questions?.categories_to_sub_categories?.category ??
+          '',
+        subCategory: sub_categories_to_questions?.sub_category ?? '',
         question,
         answers: answers_to_questions.map(
           ({ answer, pronunciation, description }) => ({
