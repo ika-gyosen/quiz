@@ -65,7 +65,16 @@ export const QuizSearchResultList = (props: Props) => {
               <TableCell component="th" scope="row">
                 {question?.category ?? ''}
               </TableCell>
-              <TableCell component="th" scope="row"></TableCell>
+              <TableCell component="th" scope="row">
+                {question.tags &&
+                  question?.tags.map((tag) => {
+                    return (
+                      <span key={tag} className={tagStyle}>
+                        {tag}
+                      </span>
+                    );
+                  })}
+              </TableCell>
               <TableCell component="th" scope="row">
                 {question?.question}
               </TableCell>
@@ -88,4 +97,8 @@ export const QuizSearchResultList = (props: Props) => {
 
 const difficultyTableHeadTextStyle = css`
   white-space: nowrap;
+`;
+
+const tagStyle = css`
+  padding: 4px;
 `;
