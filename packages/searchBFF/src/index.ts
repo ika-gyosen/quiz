@@ -3,7 +3,7 @@ import express from 'express';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { schema } from '~/schema';
 
-const port = process.env.PORT || 1111;
+const port = process.env.PORT || 8080;
 
 const app = express();
 

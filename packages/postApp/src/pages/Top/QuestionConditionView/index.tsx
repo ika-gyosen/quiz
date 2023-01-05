@@ -109,7 +109,7 @@ export const QuestionConditionView: FC<Props> = ({
         label="作問者・出典"
         control={<TextField value={author} onChange={onChangeAuthor} />}
       />
-      <div>ここには注釈が入ります。</div>
+      <div className={fontStyle}>ここには注釈が入ります。</div>
       <div>
         <Button
           label="入力内容を確認する"
@@ -125,4 +125,8 @@ const wrapper = css`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`;
+const fontStyle = css`
+  font-size: 12px;
+  color: #585656;
 `;

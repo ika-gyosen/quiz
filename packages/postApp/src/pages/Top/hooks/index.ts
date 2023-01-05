@@ -57,7 +57,7 @@ export const useTopPage = () => {
         pronunciation,
         description,
         difficulty: difficulty?.value,
-        category: category?.value,
+        categoryId: category?.value,
         tags: tags.map(({ value }) => value),
         // ToDo user機能が実装されていないので一旦固定値になっているが、ログインユーザーのIDにすべき。
         userId: 'b94838ad-0f2d-44a2-b4d9-1e273b78995a',
@@ -138,13 +138,13 @@ export const useTopPage = () => {
 };
 
 const validationSchema = z.object({
-  question: z.string(),
-  answer: z.string(),
+  question: z.string().min(1),
+  answer: z.string().min(1),
   pronunciation: z.string().optional(),
   description: z.string().optional(),
-  difficulty: z.number().optional(),
+  difficulty: z.number(),
   categoryId: z.number().optional(),
   tags: z.array(z.string()).optional(),
-  userId: z.string(),
+  userId: z.string().uuid(),
   author: z.string().optional(),
 });

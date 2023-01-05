@@ -15,6 +15,42 @@ export type Scalars = {
   uuid: string;
 };
 
+export type AddQuestionInput = {
+  /** 解答 */
+  answer: Scalars['String'];
+  /** 出典/作問者 */
+  author?: InputMaybe<Scalars['String']>;
+  /** ジャンル */
+  categoryId?: InputMaybe<Scalars['Int']>;
+  /** 備考 */
+  description?: InputMaybe<Scalars['String']>;
+  /** 難易度 */
+  difficulty?: InputMaybe<Scalars['Int']>;
+  /** 解答の読み方(ふりがな) */
+  pronunciation?: InputMaybe<Scalars['String']>;
+  /** 問題文 */
+  question: Scalars['String'];
+  /** タグID */
+  tagIds?: InputMaybe<Array<Scalars['String']>>;
+  /** 投稿者 */
+  userId: Scalars['String'];
+};
+
+export type AddQuestionResponse = {
+  __typename?: 'AddQuestionResponse';
+  succeeded: Scalars['Boolean'];
+};
+
+export type AddTagInput = {
+  /** タグID */
+  tag: Scalars['String'];
+};
+
+export type AddTagResponse = {
+  __typename?: 'AddTagResponse';
+  succeeded: Scalars['Boolean'];
+};
+
 export type Answer = {
   __typename?: 'Answer';
   answer: Scalars['String'];
@@ -59,6 +95,7 @@ export type Question = {
   question: Scalars['String'];
   questionId: Scalars['String'];
   serialNumber: Scalars['Int'];
+  subCategory?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   userName: Scalars['String'];
 };
@@ -106,6 +143,9 @@ export type CursorOrdering =
 /** mutation root */
 export type MutationRoot = {
   __typename?: 'mutation_root';
+  _dummy?: Maybe<Scalars['Boolean']>;
+  addQuestion: AddQuestionResponse;
+  addTag: AddTagResponse;
   /** delete data from the table: "quiz.answer_types" */
   delete_quiz_answer_types?: Maybe<QuizAnswerTypesMutationResponse>;
   /** delete single row from the table: "quiz.answer_types" */
@@ -122,6 +162,10 @@ export type MutationRoot = {
   delete_quiz_questions?: Maybe<QuizQuestionsMutationResponse>;
   /** delete single row from the table: "quiz.questions" */
   delete_quiz_questions_by_pk?: Maybe<QuizQuestions>;
+  /** delete data from the table: "quiz.sub_categories" */
+  delete_quiz_sub_categories?: Maybe<QuizSubCategoriesMutationResponse>;
+  /** delete single row from the table: "quiz.sub_categories" */
+  delete_quiz_sub_categories_by_pk?: Maybe<QuizSubCategories>;
   /** delete data from the table: "quiz.tags" */
   delete_quiz_tags?: Maybe<QuizTagsMutationResponse>;
   /** delete single row from the table: "quiz.tags" */
@@ -150,6 +194,10 @@ export type MutationRoot = {
   insert_quiz_questions?: Maybe<QuizQuestionsMutationResponse>;
   /** insert a single row into the table: "quiz.questions" */
   insert_quiz_questions_one?: Maybe<QuizQuestions>;
+  /** insert data into the table: "quiz.sub_categories" */
+  insert_quiz_sub_categories?: Maybe<QuizSubCategoriesMutationResponse>;
+  /** insert a single row into the table: "quiz.sub_categories" */
+  insert_quiz_sub_categories_one?: Maybe<QuizSubCategories>;
   /** insert data into the table: "quiz.tags" */
   insert_quiz_tags?: Maybe<QuizTagsMutationResponse>;
   /** insert a single row into the table: "quiz.tags" */
@@ -186,6 +234,12 @@ export type MutationRoot = {
   update_quiz_questions_by_pk?: Maybe<QuizQuestions>;
   /** update multiples rows of table: "quiz.questions" */
   update_quiz_questions_many?: Maybe<Array<Maybe<QuizQuestionsMutationResponse>>>;
+  /** update data of the table: "quiz.sub_categories" */
+  update_quiz_sub_categories?: Maybe<QuizSubCategoriesMutationResponse>;
+  /** update single row of the table: "quiz.sub_categories" */
+  update_quiz_sub_categories_by_pk?: Maybe<QuizSubCategories>;
+  /** update multiples rows of table: "quiz.sub_categories" */
+  update_quiz_sub_categories_many?: Maybe<Array<Maybe<QuizSubCategoriesMutationResponse>>>;
   /** update data of the table: "quiz.tags" */
   update_quiz_tags?: Maybe<QuizTagsMutationResponse>;
   /** update single row of the table: "quiz.tags" */
@@ -204,6 +258,18 @@ export type MutationRoot = {
   update_quiz_users_by_pk?: Maybe<QuizUsers>;
   /** update multiples rows of table: "quiz.users" */
   update_quiz_users_many?: Maybe<Array<Maybe<QuizUsersMutationResponse>>>;
+};
+
+
+/** mutation root */
+export type MutationRootAddQuestionArgs = {
+  input: AddQuestionInput;
+};
+
+
+/** mutation root */
+export type MutationRootAddTagArgs = {
+  input: AddTagInput;
 };
 
 
@@ -252,6 +318,18 @@ export type MutationRootDeleteQuizQuestionsArgs = {
 /** mutation root */
 export type MutationRootDeleteQuizQuestionsByPkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type MutationRootDeleteQuizSubCategoriesArgs = {
+  where: QuizSubCategoriesBoolExp;
+};
+
+
+/** mutation root */
+export type MutationRootDeleteQuizSubCategoriesByPkArgs = {
+  sub_category_id: Scalars['Int'];
 };
 
 
@@ -345,6 +423,20 @@ export type MutationRootInsertQuizQuestionsArgs = {
 export type MutationRootInsertQuizQuestionsOneArgs = {
   object: QuizQuestionsInsertInput;
   on_conflict?: InputMaybe<QuizQuestionsOnConflict>;
+};
+
+
+/** mutation root */
+export type MutationRootInsertQuizSubCategoriesArgs = {
+  objects: Array<QuizSubCategoriesInsertInput>;
+  on_conflict?: InputMaybe<QuizSubCategoriesOnConflict>;
+};
+
+
+/** mutation root */
+export type MutationRootInsertQuizSubCategoriesOneArgs = {
+  object: QuizSubCategoriesInsertInput;
+  on_conflict?: InputMaybe<QuizSubCategoriesOnConflict>;
 };
 
 
@@ -477,6 +569,28 @@ export type MutationRootUpdateQuizQuestionsManyArgs = {
 
 
 /** mutation root */
+export type MutationRootUpdateQuizSubCategoriesArgs = {
+  _inc?: InputMaybe<QuizSubCategoriesIncInput>;
+  _set?: InputMaybe<QuizSubCategoriesSetInput>;
+  where: QuizSubCategoriesBoolExp;
+};
+
+
+/** mutation root */
+export type MutationRootUpdateQuizSubCategoriesByPkArgs = {
+  _inc?: InputMaybe<QuizSubCategoriesIncInput>;
+  _set?: InputMaybe<QuizSubCategoriesSetInput>;
+  pk_columns: QuizSubCategoriesPkColumnsInput;
+};
+
+
+/** mutation root */
+export type MutationRootUpdateQuizSubCategoriesManyArgs = {
+  updates: Array<QuizSubCategoriesUpdates>;
+};
+
+
+/** mutation root */
 export type MutationRootUpdateQuizTagsArgs = {
   _set?: InputMaybe<QuizTagsSetInput>;
   where: QuizTagsBoolExp;
@@ -552,6 +666,7 @@ export type OrderBy =
 
 export type QueryRoot = {
   __typename?: 'query_root';
+  _dummy?: Maybe<Scalars['Boolean']>;
   questions: Array<Maybe<Question>>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
@@ -577,6 +692,12 @@ export type QueryRoot = {
   quiz_questions_aggregate: QuizQuestionsAggregate;
   /** fetch data from the table: "quiz.questions" using primary key columns */
   quiz_questions_by_pk?: Maybe<QuizQuestions>;
+  /** fetch data from the table: "quiz.sub_categories" */
+  quiz_sub_categories: Array<QuizSubCategories>;
+  /** fetch aggregated fields from the table: "quiz.sub_categories" */
+  quiz_sub_categories_aggregate: QuizSubCategoriesAggregate;
+  /** fetch data from the table: "quiz.sub_categories" using primary key columns */
+  quiz_sub_categories_by_pk?: Maybe<QuizSubCategories>;
   /** fetch data from the table: "quiz.tags" */
   quiz_tags: Array<QuizTags>;
   /** fetch aggregated fields from the table: "quiz.tags" */
@@ -692,6 +813,29 @@ export type QueryRootQuizQuestionsAggregateArgs = {
 
 export type QueryRootQuizQuestionsByPkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type QueryRootQuizSubCategoriesArgs = {
+  distinct_on?: InputMaybe<Array<QuizSubCategoriesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<QuizSubCategoriesOrderBy>>;
+  where?: InputMaybe<QuizSubCategoriesBoolExp>;
+};
+
+
+export type QueryRootQuizSubCategoriesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<QuizSubCategoriesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<QuizSubCategoriesOrderBy>>;
+  where?: InputMaybe<QuizSubCategoriesBoolExp>;
+};
+
+
+export type QueryRootQuizSubCategoriesByPkArgs = {
+  sub_category_id: Scalars['Int'];
 };
 
 
@@ -1384,14 +1528,14 @@ export type QuizQuestions = {
   /** An aggregate relationship */
   answers_to_questions_aggregate: QuizAnswersAggregate;
   author?: Maybe<Scalars['String']>;
-  /** An object relationship */
-  categories_to_questions?: Maybe<QuizCategories>;
   category_id?: Maybe<Scalars['Int']>;
   created_at: Scalars['timestamptz'];
-  difficulty: Scalars['Int'];
+  difficulty?: Maybe<Scalars['Int']>;
   id: Scalars['uuid'];
   question: Scalars['String'];
   serial_number: Scalars['Int'];
+  /** An object relationship */
+  sub_categories_to_questions?: Maybe<QuizSubCategories>;
   /** An array relationship */
   tags_to_questions_to_questions: Array<QuizTagsToQuestions>;
   /** An aggregate relationship */
@@ -1490,13 +1634,13 @@ export type QuizQuestionsBoolExp = {
   answers_to_questions?: InputMaybe<QuizAnswersBoolExp>;
   answers_to_questions_aggregate?: InputMaybe<QuizAnswersAggregateBoolExp>;
   author?: InputMaybe<StringComparisonExp>;
-  categories_to_questions?: InputMaybe<QuizCategoriesBoolExp>;
   category_id?: InputMaybe<IntComparisonExp>;
   created_at?: InputMaybe<TimestamptzComparisonExp>;
   difficulty?: InputMaybe<IntComparisonExp>;
   id?: InputMaybe<UuidComparisonExp>;
   question?: InputMaybe<StringComparisonExp>;
   serial_number?: InputMaybe<IntComparisonExp>;
+  sub_categories_to_questions?: InputMaybe<QuizSubCategoriesBoolExp>;
   tags_to_questions_to_questions?: InputMaybe<QuizTagsToQuestionsBoolExp>;
   tags_to_questions_to_questions_aggregate?: InputMaybe<QuizTagsToQuestionsAggregateBoolExp>;
   user_id?: InputMaybe<UuidComparisonExp>;
@@ -1524,13 +1668,13 @@ export type QuizQuestionsInsertInput = {
   answer_types_to_questions?: InputMaybe<QuizAnswerTypesObjRelInsertInput>;
   answers_to_questions?: InputMaybe<QuizAnswersArrRelInsertInput>;
   author?: InputMaybe<Scalars['String']>;
-  categories_to_questions?: InputMaybe<QuizCategoriesObjRelInsertInput>;
   category_id?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   difficulty?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
   question?: InputMaybe<Scalars['String']>;
   serial_number?: InputMaybe<Scalars['Int']>;
+  sub_categories_to_questions?: InputMaybe<QuizSubCategoriesObjRelInsertInput>;
   tags_to_questions_to_questions?: InputMaybe<QuizTagsToQuestionsArrRelInsertInput>;
   user_id?: InputMaybe<Scalars['uuid']>;
   users_to_questions?: InputMaybe<QuizUsersObjRelInsertInput>;
@@ -1586,13 +1730,13 @@ export type QuizQuestionsOrderBy = {
   answer_types_to_questions?: InputMaybe<QuizAnswerTypesOrderBy>;
   answers_to_questions_aggregate?: InputMaybe<QuizAnswersAggregateOrderBy>;
   author?: InputMaybe<OrderBy>;
-  categories_to_questions?: InputMaybe<QuizCategoriesOrderBy>;
   category_id?: InputMaybe<OrderBy>;
   created_at?: InputMaybe<OrderBy>;
   difficulty?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
   question?: InputMaybe<OrderBy>;
   serial_number?: InputMaybe<OrderBy>;
+  sub_categories_to_questions?: InputMaybe<QuizSubCategoriesOrderBy>;
   tags_to_questions_to_questions_aggregate?: InputMaybe<QuizTagsToQuestionsAggregateOrderBy>;
   user_id?: InputMaybe<OrderBy>;
   users_to_questions?: InputMaybe<QuizUsersOrderBy>;
@@ -1748,6 +1892,234 @@ export type QuizQuestionsVarianceFields = {
   category_id?: Maybe<Scalars['Float']>;
   difficulty?: Maybe<Scalars['Float']>;
   serial_number?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "quiz.sub_categories" */
+export type QuizSubCategories = {
+  __typename?: 'quiz_sub_categories';
+  /** An object relationship */
+  categories_to_sub_categories?: Maybe<QuizCategories>;
+  category_id: Scalars['Int'];
+  sub_category: Scalars['String'];
+  sub_category_id: Scalars['Int'];
+};
+
+/** aggregated selection of "quiz.sub_categories" */
+export type QuizSubCategoriesAggregate = {
+  __typename?: 'quiz_sub_categories_aggregate';
+  aggregate?: Maybe<QuizSubCategoriesAggregateFields>;
+  nodes: Array<QuizSubCategories>;
+};
+
+/** aggregate fields of "quiz.sub_categories" */
+export type QuizSubCategoriesAggregateFields = {
+  __typename?: 'quiz_sub_categories_aggregate_fields';
+  avg?: Maybe<QuizSubCategoriesAvgFields>;
+  count: Scalars['Int'];
+  max?: Maybe<QuizSubCategoriesMaxFields>;
+  min?: Maybe<QuizSubCategoriesMinFields>;
+  stddev?: Maybe<QuizSubCategoriesStddevFields>;
+  stddev_pop?: Maybe<QuizSubCategoriesStddevPopFields>;
+  stddev_samp?: Maybe<QuizSubCategoriesStddevSampFields>;
+  sum?: Maybe<QuizSubCategoriesSumFields>;
+  var_pop?: Maybe<QuizSubCategoriesVarPopFields>;
+  var_samp?: Maybe<QuizSubCategoriesVarSampFields>;
+  variance?: Maybe<QuizSubCategoriesVarianceFields>;
+};
+
+
+/** aggregate fields of "quiz.sub_categories" */
+export type QuizSubCategoriesAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<QuizSubCategoriesSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type QuizSubCategoriesAvgFields = {
+  __typename?: 'quiz_sub_categories_avg_fields';
+  category_id?: Maybe<Scalars['Float']>;
+  sub_category_id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "quiz.sub_categories". All fields are combined with a logical 'AND'. */
+export type QuizSubCategoriesBoolExp = {
+  _and?: InputMaybe<Array<QuizSubCategoriesBoolExp>>;
+  _not?: InputMaybe<QuizSubCategoriesBoolExp>;
+  _or?: InputMaybe<Array<QuizSubCategoriesBoolExp>>;
+  categories_to_sub_categories?: InputMaybe<QuizCategoriesBoolExp>;
+  category_id?: InputMaybe<IntComparisonExp>;
+  sub_category?: InputMaybe<StringComparisonExp>;
+  sub_category_id?: InputMaybe<IntComparisonExp>;
+};
+
+/** unique or primary key constraints on table "quiz.sub_categories" */
+export type QuizSubCategoriesConstraint =
+  /** unique or primary key constraint on columns "sub_category_id" */
+  | 'sub_categories_pkey'
+  /** unique or primary key constraint on columns "sub_category" */
+  | 'sub_categories_sub_category_key';
+
+/** input type for incrementing numeric columns in table "quiz.sub_categories" */
+export type QuizSubCategoriesIncInput = {
+  category_id?: InputMaybe<Scalars['Int']>;
+  sub_category_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "quiz.sub_categories" */
+export type QuizSubCategoriesInsertInput = {
+  categories_to_sub_categories?: InputMaybe<QuizCategoriesObjRelInsertInput>;
+  category_id?: InputMaybe<Scalars['Int']>;
+  sub_category?: InputMaybe<Scalars['String']>;
+  sub_category_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type QuizSubCategoriesMaxFields = {
+  __typename?: 'quiz_sub_categories_max_fields';
+  category_id?: Maybe<Scalars['Int']>;
+  sub_category?: Maybe<Scalars['String']>;
+  sub_category_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type QuizSubCategoriesMinFields = {
+  __typename?: 'quiz_sub_categories_min_fields';
+  category_id?: Maybe<Scalars['Int']>;
+  sub_category?: Maybe<Scalars['String']>;
+  sub_category_id?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "quiz.sub_categories" */
+export type QuizSubCategoriesMutationResponse = {
+  __typename?: 'quiz_sub_categories_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<QuizSubCategories>;
+};
+
+/** input type for inserting object relation for remote table "quiz.sub_categories" */
+export type QuizSubCategoriesObjRelInsertInput = {
+  data: QuizSubCategoriesInsertInput;
+  /** upsert condition */
+  on_conflict?: InputMaybe<QuizSubCategoriesOnConflict>;
+};
+
+/** on_conflict condition type for table "quiz.sub_categories" */
+export type QuizSubCategoriesOnConflict = {
+  constraint: QuizSubCategoriesConstraint;
+  update_columns?: Array<QuizSubCategoriesUpdateColumn>;
+  where?: InputMaybe<QuizSubCategoriesBoolExp>;
+};
+
+/** Ordering options when selecting data from "quiz.sub_categories". */
+export type QuizSubCategoriesOrderBy = {
+  categories_to_sub_categories?: InputMaybe<QuizCategoriesOrderBy>;
+  category_id?: InputMaybe<OrderBy>;
+  sub_category?: InputMaybe<OrderBy>;
+  sub_category_id?: InputMaybe<OrderBy>;
+};
+
+/** primary key columns input for table: quiz.sub_categories */
+export type QuizSubCategoriesPkColumnsInput = {
+  sub_category_id: Scalars['Int'];
+};
+
+/** select columns of table "quiz.sub_categories" */
+export type QuizSubCategoriesSelectColumn =
+  /** column name */
+  | 'category_id'
+  /** column name */
+  | 'sub_category'
+  /** column name */
+  | 'sub_category_id';
+
+/** input type for updating data in table "quiz.sub_categories" */
+export type QuizSubCategoriesSetInput = {
+  category_id?: InputMaybe<Scalars['Int']>;
+  sub_category?: InputMaybe<Scalars['String']>;
+  sub_category_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type QuizSubCategoriesStddevFields = {
+  __typename?: 'quiz_sub_categories_stddev_fields';
+  category_id?: Maybe<Scalars['Float']>;
+  sub_category_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type QuizSubCategoriesStddevPopFields = {
+  __typename?: 'quiz_sub_categories_stddev_pop_fields';
+  category_id?: Maybe<Scalars['Float']>;
+  sub_category_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type QuizSubCategoriesStddevSampFields = {
+  __typename?: 'quiz_sub_categories_stddev_samp_fields';
+  category_id?: Maybe<Scalars['Float']>;
+  sub_category_id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "quiz_sub_categories" */
+export type QuizSubCategoriesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: QuizSubCategoriesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type QuizSubCategoriesStreamCursorValueInput = {
+  category_id?: InputMaybe<Scalars['Int']>;
+  sub_category?: InputMaybe<Scalars['String']>;
+  sub_category_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type QuizSubCategoriesSumFields = {
+  __typename?: 'quiz_sub_categories_sum_fields';
+  category_id?: Maybe<Scalars['Int']>;
+  sub_category_id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "quiz.sub_categories" */
+export type QuizSubCategoriesUpdateColumn =
+  /** column name */
+  | 'category_id'
+  /** column name */
+  | 'sub_category'
+  /** column name */
+  | 'sub_category_id';
+
+export type QuizSubCategoriesUpdates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<QuizSubCategoriesIncInput>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<QuizSubCategoriesSetInput>;
+  where: QuizSubCategoriesBoolExp;
+};
+
+/** aggregate var_pop on columns */
+export type QuizSubCategoriesVarPopFields = {
+  __typename?: 'quiz_sub_categories_var_pop_fields';
+  category_id?: Maybe<Scalars['Float']>;
+  sub_category_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type QuizSubCategoriesVarSampFields = {
+  __typename?: 'quiz_sub_categories_var_samp_fields';
+  category_id?: Maybe<Scalars['Float']>;
+  sub_category_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type QuizSubCategoriesVarianceFields = {
+  __typename?: 'quiz_sub_categories_variance_fields';
+  category_id?: Maybe<Scalars['Float']>;
+  sub_category_id?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "quiz.tags" */
@@ -2199,6 +2571,7 @@ export type QuizUsersUpdates = {
 
 export type SubscriptionRoot = {
   __typename?: 'subscription_root';
+  _dummy?: Maybe<Scalars['Boolean']>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
   /** fetch aggregated fields from the table: "quiz.answer_types" */
@@ -2231,6 +2604,14 @@ export type SubscriptionRoot = {
   quiz_questions_by_pk?: Maybe<QuizQuestions>;
   /** fetch data from the table in a streaming manner: "quiz.questions" */
   quiz_questions_stream: Array<QuizQuestions>;
+  /** fetch data from the table: "quiz.sub_categories" */
+  quiz_sub_categories: Array<QuizSubCategories>;
+  /** fetch aggregated fields from the table: "quiz.sub_categories" */
+  quiz_sub_categories_aggregate: QuizSubCategoriesAggregate;
+  /** fetch data from the table: "quiz.sub_categories" using primary key columns */
+  quiz_sub_categories_by_pk?: Maybe<QuizSubCategories>;
+  /** fetch data from the table in a streaming manner: "quiz.sub_categories" */
+  quiz_sub_categories_stream: Array<QuizSubCategories>;
   /** fetch data from the table: "quiz.tags" */
   quiz_tags: Array<QuizTags>;
   /** fetch aggregated fields from the table: "quiz.tags" */
@@ -2375,6 +2756,36 @@ export type SubscriptionRootQuizQuestionsStreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<QuizQuestionsStreamCursorInput>>;
   where?: InputMaybe<QuizQuestionsBoolExp>;
+};
+
+
+export type SubscriptionRootQuizSubCategoriesArgs = {
+  distinct_on?: InputMaybe<Array<QuizSubCategoriesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<QuizSubCategoriesOrderBy>>;
+  where?: InputMaybe<QuizSubCategoriesBoolExp>;
+};
+
+
+export type SubscriptionRootQuizSubCategoriesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<QuizSubCategoriesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<QuizSubCategoriesOrderBy>>;
+  where?: InputMaybe<QuizSubCategoriesBoolExp>;
+};
+
+
+export type SubscriptionRootQuizSubCategoriesByPkArgs = {
+  sub_category_id: Scalars['Int'];
+};
+
+
+export type SubscriptionRootQuizSubCategoriesStreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<QuizSubCategoriesStreamCursorInput>>;
+  where?: InputMaybe<QuizSubCategoriesBoolExp>;
 };
 
 

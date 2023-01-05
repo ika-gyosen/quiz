@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:staging": "yarn type-check && vite build --mode stg",
     "preview": "vite preview",
     "lint": "eslint .",
     "codegen": "graphql-codegen",

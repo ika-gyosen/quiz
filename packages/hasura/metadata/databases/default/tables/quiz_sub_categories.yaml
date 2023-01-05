@@ -1,0 +1,13 @@
+table:
+  name: sub_categories
+  schema: quiz
+object_relationships:
+  - name: categories_to_sub_categories
+    using:
+      manual_configuration:
+        column_mapping:
+          category_id: category_id
+        insertion_order: null
+        remote_table:
+          name: categories
+          schema: quiz

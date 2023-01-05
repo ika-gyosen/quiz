@@ -1,0 +1,21 @@
+steps:
+  - name: node:16
+    entrypoint: yarn
+    args: ['install']
+    dir: '${_PATH}'
+  - name: node:16
+    entrypoint: yarn
+    args: ['build:staging']
+    dir: '${_PATH}'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'app',
+        'deploy',
+        '--appyaml=appengine/app.stg.yaml',
+        '--project=$PROJECT_ID',
+        '--quiet',
+      ]
+    dir: '${_PATH}'
+substitutions:
+  _PATH: .

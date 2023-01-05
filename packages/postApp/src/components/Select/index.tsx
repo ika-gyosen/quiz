@@ -23,9 +23,15 @@ export const Select = <T extends string | number>({
   onChange,
 }: Props<T>) => {
   const handleChange = useCallback(
-    (e: SelectChangeEvent<T>) =>
-      onChange({ label: e.target.name, value: e.target.value as T }),
-    [onChange],
+    (e: SelectChangeEvent<T>) => {
+      // 選択されたvalueのlabelを取得
+      const label =
+        options.find(({ value }) => {
+          return value === e.target.value;
+        })?.label ?? '';
+      onChange({ label: label, value: e.target.value as T });
+    },
+    [onChange, options],
   );
 
   return (

@@ -1,0 +1,20 @@
+env: standard
+runtime: nodejs16
+service: default
+handlers:
+  - url: /(.*\.(gif|png|jpg|ico|txt|svg|js|css))$
+    static_files: dist/\1
+    upload: dist/.*\.(gif|png|jpg|ico|txt|svg|js|css)$
+    http_headers:
+      Strict-Transport-Security: max-age=31536000; includeSubDomains
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: DENY
+      X-XSS-Protection: 0
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index.html
+    http_headers:
+      Strict-Transport-Security: max-age=31536000; includeSubDomains
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: DENY
+      X-XSS-Protection: 0
