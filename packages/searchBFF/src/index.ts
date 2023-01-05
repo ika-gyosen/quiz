@@ -8,8 +8,8 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 app.use(express.json());
-app.get('/', (req, res) => {
-  res.send('running');
+app.get('/status', (req, res) => {
+  res.send('status OK');
 });
 
 const server = new ApolloServer({
