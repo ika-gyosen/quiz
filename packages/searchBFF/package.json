@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=local webpack --watch --progress",
+    "start:server": "NODE_ENV=local webpack --watch --progress",
     "lint": "eslint --ext .ts .",
-    "codegen": "graphql-codegen",
+    "codegen": "graphql-codegen -r dotenv/config",
     "type-check": "tsc --noEmit",
     "build:staging": "NODE_ENV=staging webpack --progress"
   },
