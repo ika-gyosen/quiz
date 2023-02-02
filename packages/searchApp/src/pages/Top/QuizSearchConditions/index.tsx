@@ -5,7 +5,7 @@ import { MultiSelect } from '~/components/MultiSelect';
 import { TagsInput } from '~/components/TagsInput';
 import {
   difficultyOptions,
-  categoryOptions,
+  subCategoryOptions,
   questionsNumberOptions,
 } from '~/constants/options';
 
@@ -54,8 +54,11 @@ export const QuizSearchConditions = (props: Props) => {
         />
       </div>
       <div className={searchInputRowStyle}>
-        カテゴリー:
-        <MultiSelect options={categoryOptions} onChange={onChangeCategories} />
+        サブカテゴリー:
+        <MultiSelect
+          options={subCategoryOptions}
+          onChange={onChangeCategories}
+        />
       </div>
       <div className={searchInputRowStyle}>
         タグ:
