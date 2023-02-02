@@ -31,7 +31,8 @@ export const createSql = async (input: Input) => {
   const { path, sheetNumber, startRowNumber, idColumn } = input;
   const worksheet = await getWorksheet({ path, sheetNumber });
 
-  const sqlArray: string[] = [];
+  let sqlArray: string[] = [];
+  let questionsSerialNumber = 1;
 
   addAnswerTypesSQL({ sqlArray });
 
@@ -40,6 +41,10 @@ export const createSql = async (input: Input) => {
   addSubCategorySQL({ sqlArray });
 
   const userId = uuidv4();
+
+  const userSQL = `INSERT INTO "quiz"."users"("user_id", "user_name") VALUES ('${userId}', E'default');`;
+
+  sqlArray.push(userSQL);
 
   for (let i = startRowNumber; ; i++) {
     const row = worksheet.getRow(i);
@@ -59,26 +64,24 @@ export const createSql = async (input: Input) => {
 
     const createdAt = "2022-02-03 07:00:00.90902+00";
 
-    const serialNumber = row.getCell(1).value;
+    // エクセルのA列にある「番号」の値を取得して使おうと思ったが、３が全角数字だったためinteger判定されず、エラーが出た。
+    // そのため、こちらで連番を発行する。
+    // const serialNumber = row.getCell(1).value;
+    const serialNumber = questionsSerialNumber;
 
     const author = row.getCell(12).value;
 
-    // D列にカテゴリー番号が入っているが、これは数字ではなく、C列の「14-ライフスタイル」を参照して数字部分を切り出す関数が入っている。
-    // getCell()でD列のcellの値をとっても、Objectにしかならない。
-    // よって、C列の値をハイフン区切りで配列に分け、その1つ目の要素を取得し、数字に変換する。
-    const categoryId = Number(row.getCell(3).value?.toString().split("-")[0]);
-
-    // サブカテゴリー番号についても、カテゴリー番号と同様。
-    // G列にカテゴリー番号が入っているが、これは数字ではなく、F列の「34-生活」を参照して数字部分を切り出す関数が入っている。
+    // G列にサブカテゴリー番号が入っているが、これは数字ではなく、F列の「34-生活」を参照して数字部分を切り出す関数が入っている。
     // getCell()でG列のcellの値をとっても、Objectにしかならない。
     // よって、F列の値をハイフン区切りで配列に分け、その1つ目の要素を取得し、数字に変換する。
     const subCategoryId = Number(
       row.getCell(6).value?.toString().split("-")[0]
     );
 
-    const questionSQL = `INSERT INTO "quiz"."questions"("id", "question", "difficulty", "answer_type_id", "created_at", "serial_number", "user_id", "author", "category_id", "sub_category_id") VALUES ('${questionId}', E'${jsStringEscape(
+    const questionSQL = `INSERT INTO "quiz"."questions"("id", "question", "difficulty", "answer_type_id", "created_at", "serial_number", "user_id", "author", "category_id") VALUES ('${questionId}', E'${jsStringEscape(
       question
-    )}', ${difficulty}, ${answerTypeId}, '${createdAt}', ${serialNumber}, '${userId}', E'${author}', ${categoryId}, ${subCategoryId});`;
+    )}', ${difficulty}, ${answerTypeId}, '${createdAt}', ${serialNumber}, '${userId}', E'${author}', ${subCategoryId});`;
+    // 補足: 問題のサブカテゴリーが何かわかればカテゴリーも一つに定まるため、questionsテーブルにはサブカテゴリーの情報のみ持たせている
 
     sqlArray.push(questionSQL);
 
@@ -96,6 +99,8 @@ export const createSql = async (input: Input) => {
     )}', ${pronunciation}, E'${jsStringEscape(description)}');`;
 
     sqlArray.push(answerSQL);
+
+    questionsSerialNumber += 1;
   }
 
   // categoriesテーブルを登録するsql文
