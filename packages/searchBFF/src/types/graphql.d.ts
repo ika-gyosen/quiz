@@ -609,7 +609,6 @@ export type OrderBy =
 
 export type QueryRoot = {
   __typename?: 'query_root';
-  questions: Array<Maybe<Question>>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
   /** fetch aggregated fields from the table: "quiz.answer_types" */
@@ -658,10 +657,6 @@ export type QueryRoot = {
   quiz_users_aggregate: QuizUsersAggregate;
   /** fetch data from the table: "quiz.users" using primary key columns */
   quiz_users_by_pk?: Maybe<QuizUsers>;
-};
-
-export type QueryRootQuestionsArgs = {
-  input: GetQuestionsInput;
 };
 
 export type QueryRootQuizAnswerTypesArgs = {
@@ -3764,12 +3759,6 @@ export type QueryRootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['query_root'] = ResolversParentTypes['query_root'],
 > = ResolversObject<{
-  questions?: Resolver<
-    Array<Maybe<ResolversTypes['Question']>>,
-    ParentType,
-    ContextType,
-    RequireFields<QueryRootQuestionsArgs, 'input'>
-  >;
   quiz_answer_types?: Resolver<
     Array<ResolversTypes['quiz_answer_types']>,
     ParentType,
