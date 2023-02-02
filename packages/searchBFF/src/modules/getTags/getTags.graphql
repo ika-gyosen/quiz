@@ -5,3 +5,11 @@ query getTags {
   }
 }
 
+query testGetQuiz {
+  quiz_questions {
+    question
+  }
+}
+
+
+

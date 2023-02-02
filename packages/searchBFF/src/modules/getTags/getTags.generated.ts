@@ -10,11 +10,25 @@ export type GetTagsQuery = {
   quiz_tags: Array<{ __typename?: 'quiz_tags'; tag: string; tag_id: string }>;
 };
 
+export type TestGetQuizQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type TestGetQuizQuery = {
+  __typename?: 'query_root';
+  quiz_questions: Array<{ __typename?: 'quiz_questions'; question: string }>;
+};
+
 export const GetTagsDocument = gql`
   query getTags {
     quiz_tags {
       tag
       tag_id
+    }
+  }
+`;
+export const TestGetQuizDocument = gql`
+  query testGetQuiz {
+    quiz_questions {
+      question
     }
   }
 `;
@@ -47,6 +61,20 @@ export function getSdk(
             ...wrappedRequestHeaders,
           }),
         'getTags',
+        'query',
+      );
+    },
+    testGetQuiz(
+      variables?: TestGetQuizQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers'],
+    ): Promise<TestGetQuizQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<TestGetQuizQuery>(TestGetQuizDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'testGetQuiz',
         'query',
       );
     },
