@@ -12,6 +12,7 @@
     "metadataReload": "hasura metadata reload --skip-update-check",
     "migrate": "hasura migrate apply --database-name default --skip-update-check",
     "status": "hasura migrate status --database-name default",
+    "seed:apply:kansei": "hasura seed apply --file sual-kansei-questions.sql --database-name default --skip-update-check",
     "seed:apply:TEST_1": "hasura seed apply --file TEST_1.sql --database-name default",
     "seed:apply:TEST_2": "hasura seed apply --file TEST_2.sql --database-name default",
     "stg:metadata": "hasura metadata apply --envfile .hasura.env.stg --skip-update-check",
