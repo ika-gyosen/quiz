@@ -1,6 +1,6 @@
 query getTagsFromDB {
-  quiz_tags {
+  getTags {
     tag
-    tag_id
+    tagId
   }
 }

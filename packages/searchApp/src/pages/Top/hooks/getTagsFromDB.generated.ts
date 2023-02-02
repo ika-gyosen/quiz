@@ -7,14 +7,14 @@ const defaultOptions = {} as const;
 export type GetTagsFromDbQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type GetTagsFromDbQuery = { __typename?: 'query_root', quiz_tags: Array<{ __typename?: 'quiz_tags', tag: string, tag_id: any }> };
+export type GetTagsFromDbQuery = { __typename?: 'Query', getTags: Array<{ __typename?: 'Tag', tag: string, tagId: string }> };
 
 
 export const GetTagsFromDbDocument = gql`
     query getTagsFromDB {
-  quiz_tags {
+  getTags {
     tag
-    tag_id
+    tagId
   }
 }
     `;

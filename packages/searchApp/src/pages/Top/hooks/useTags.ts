@@ -10,8 +10,8 @@ export const useTags = () => {
   useEffect(() => {
     if (!data) return;
     setSuggestionTags(
-      data?.quiz_tags.map(({ tag, tag_id }) => {
-        return { label: tag, value: tag_id };
+      data?.getTags.map(({ tag, tagId }) => {
+        return { label: tag, value: tagId };
       }),
     );
   }, [data, suggestionTags]);

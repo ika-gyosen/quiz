@@ -14,7 +14,7 @@ export type GetQuestionsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetQuestionsQuery = { __typename?: 'query_root', questions: Array<{ __typename?: 'Question', questionId: string, serialNumber: number, difficulty?: number | undefined, category?: string | undefined, subCategory?: string | undefined, question: string, tags?: Array<string | undefined> | undefined, userName: string, author?: string | undefined, answers: Array<{ __typename?: 'Answer', answer: string, pronunciation?: string | undefined, description?: string | undefined }> } | undefined> };
+export type GetQuestionsQuery = { __typename?: 'Query', questions: Array<{ __typename?: 'Question', questionId: string, serialNumber: number, difficulty?: number | undefined, category?: string | undefined, subCategory?: string | undefined, question: string, tags?: Array<string | undefined> | undefined, userName: string, author?: string | undefined, answers: Array<{ __typename?: 'Answer', answer: string, pronunciation?: string | undefined, description?: string | undefined }> } | undefined> };
 
 
 export const GetQuestionsDocument = gql`
