@@ -28,42 +28,6 @@ export type Scalars = {
   uuid: string;
 };
 
-export type AddQuestionInput = {
-  /** 解答 */
-  answer: Scalars['String'];
-  /** 出典/作問者 */
-  author?: InputMaybe<Scalars['String']>;
-  /** ジャンル */
-  categoryId?: InputMaybe<Scalars['Int']>;
-  /** 備考 */
-  description?: InputMaybe<Scalars['String']>;
-  /** 難易度 */
-  difficulty?: InputMaybe<Scalars['Int']>;
-  /** 解答の読み方(ふりがな) */
-  pronunciation?: InputMaybe<Scalars['String']>;
-  /** 問題文 */
-  question: Scalars['String'];
-  /** タグID */
-  tagIds?: InputMaybe<Array<Scalars['String']>>;
-  /** 投稿者 */
-  userId: Scalars['String'];
-};
-
-export type AddQuestionResponse = {
-  __typename?: 'AddQuestionResponse';
-  succeeded: Scalars['Boolean'];
-};
-
-export type AddTagInput = {
-  /** タグID */
-  tag: Scalars['String'];
-};
-
-export type AddTagResponse = {
-  __typename?: 'AddTagResponse';
-  succeeded: Scalars['Boolean'];
-};
-
 export type Answer = {
   __typename?: 'Answer';
   answer: Scalars['String'];
@@ -176,9 +140,6 @@ export type CursorOrdering =
 /** mutation root */
 export type MutationRoot = {
   __typename?: 'mutation_root';
-  _dummy?: Maybe<Scalars['Boolean']>;
-  addQuestion: AddQuestionResponse;
-  addTag: AddTagResponse;
   /** delete data from the table: "quiz.answer_types" */
   delete_quiz_answer_types?: Maybe<QuizAnswerTypesMutationResponse>;
   /** delete single row from the table: "quiz.answer_types" */
@@ -301,16 +262,6 @@ export type MutationRoot = {
   update_quiz_users_by_pk?: Maybe<QuizUsers>;
   /** update multiples rows of table: "quiz.users" */
   update_quiz_users_many?: Maybe<Array<Maybe<QuizUsersMutationResponse>>>;
-};
-
-/** mutation root */
-export type MutationRootAddQuestionArgs = {
-  input: AddQuestionInput;
-};
-
-/** mutation root */
-export type MutationRootAddTagArgs = {
-  input: AddTagInput;
 };
 
 /** mutation root */
@@ -651,8 +602,6 @@ export type OrderBy =
 
 export type QueryRoot = {
   __typename?: 'query_root';
-  _dummy?: Maybe<Scalars['Boolean']>;
-  questions: Array<Maybe<Question>>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
   /** fetch aggregated fields from the table: "quiz.answer_types" */
@@ -701,10 +650,6 @@ export type QueryRoot = {
   quiz_users_aggregate: QuizUsersAggregate;
   /** fetch data from the table: "quiz.users" using primary key columns */
   quiz_users_by_pk?: Maybe<QuizUsers>;
-};
-
-export type QueryRootQuestionsArgs = {
-  input: GetQuestionsInput;
 };
 
 export type QueryRootQuizAnswerTypesArgs = {
@@ -1046,6 +991,7 @@ export type QuizAnswerTypesUpdates = {
   _inc?: InputMaybe<QuizAnswerTypesIncInput>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<QuizAnswerTypesSetInput>;
+  /** filter the rows which have to be updated */
   where: QuizAnswerTypesBoolExp;
 };
 
@@ -1272,6 +1218,7 @@ export type QuizAnswersUpdateColumn =
 export type QuizAnswersUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<QuizAnswersSetInput>;
+  /** filter the rows which have to be updated */
   where: QuizAnswersBoolExp;
 };
 
@@ -1453,6 +1400,7 @@ export type QuizCategoriesUpdates = {
   _inc?: InputMaybe<QuizCategoriesIncInput>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<QuizCategoriesSetInput>;
+  /** filter the rows which have to be updated */
   where: QuizCategoriesBoolExp;
 };
 
@@ -1816,6 +1764,7 @@ export type QuizQuestionsUpdates = {
   _inc?: InputMaybe<QuizQuestionsIncInput>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<QuizQuestionsSetInput>;
+  /** filter the rows which have to be updated */
   where: QuizQuestionsBoolExp;
 };
 
@@ -2049,6 +1998,7 @@ export type QuizSubCategoriesUpdates = {
   _inc?: InputMaybe<QuizSubCategoriesIncInput>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<QuizSubCategoriesSetInput>;
+  /** filter the rows which have to be updated */
   where: QuizSubCategoriesBoolExp;
 };
 
@@ -2365,6 +2315,7 @@ export type QuizTagsToQuestionsUpdateColumn =
 export type QuizTagsToQuestionsUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<QuizTagsToQuestionsSetInput>;
+  /** filter the rows which have to be updated */
   where: QuizTagsToQuestionsBoolExp;
 };
 
@@ -2378,6 +2329,7 @@ export type QuizTagsUpdateColumn =
 export type QuizTagsUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<QuizTagsSetInput>;
+  /** filter the rows which have to be updated */
   where: QuizTagsBoolExp;
 };
 
@@ -2514,12 +2466,12 @@ export type QuizUsersUpdateColumn =
 export type QuizUsersUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<QuizUsersSetInput>;
+  /** filter the rows which have to be updated */
   where: QuizUsersBoolExp;
 };
 
 export type SubscriptionRoot = {
   __typename?: 'subscription_root';
-  _dummy?: Maybe<Scalars['Boolean']>;
   /** fetch data from the table: "quiz.answer_types" */
   quiz_answer_types: Array<QuizAnswerTypes>;
   /** fetch aggregated fields from the table: "quiz.answer_types" */
@@ -2931,10 +2883,6 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
-  AddQuestionInput: AddQuestionInput;
-  AddQuestionResponse: ResolverTypeWrapper<AddQuestionResponse>;
-  AddTagInput: AddTagInput;
-  AddTagResponse: ResolverTypeWrapper<AddTagResponse>;
   Answer: ResolverTypeWrapper<Answer>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
@@ -3157,10 +3105,6 @@ export type ResolversTypes = ResolversObject<{
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
-  AddQuestionInput: AddQuestionInput;
-  AddQuestionResponse: AddQuestionResponse;
-  AddTagInput: AddTagInput;
-  AddTagResponse: AddTagResponse;
   Answer: Answer;
   Boolean: Scalars['Boolean'];
   Float: Scalars['Float'];
@@ -3367,22 +3311,6 @@ export type CachedDirectiveResolver<
   Args = CachedDirectiveArgs,
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type AddQuestionResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['AddQuestionResponse'] = ResolversParentTypes['AddQuestionResponse'],
-> = ResolversObject<{
-  succeeded?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type AddTagResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['AddTagResponse'] = ResolversParentTypes['AddTagResponse'],
-> = ResolversObject<{
-  succeeded?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type AnswerResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Answer'] = ResolversParentTypes['Answer'],
@@ -3460,19 +3388,6 @@ export type MutationRootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['mutation_root'] = ResolversParentTypes['mutation_root'],
 > = ResolversObject<{
-  _dummy?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  addQuestion?: Resolver<
-    ResolversTypes['AddQuestionResponse'],
-    ParentType,
-    ContextType,
-    RequireFields<MutationRootAddQuestionArgs, 'input'>
-  >;
-  addTag?: Resolver<
-    ResolversTypes['AddTagResponse'],
-    ParentType,
-    ContextType,
-    RequireFields<MutationRootAddTagArgs, 'input'>
-  >;
   delete_quiz_answer_types?: Resolver<
     Maybe<ResolversTypes['quiz_answer_types_mutation_response']>,
     ParentType,
@@ -3825,13 +3740,6 @@ export type QueryRootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['query_root'] = ResolversParentTypes['query_root'],
 > = ResolversObject<{
-  _dummy?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  questions?: Resolver<
-    Array<Maybe<ResolversTypes['Question']>>,
-    ParentType,
-    ContextType,
-    RequireFields<QueryRootQuestionsArgs, 'input'>
-  >;
   quiz_answer_types?: Resolver<
     Array<ResolversTypes['quiz_answer_types']>,
     ParentType,
@@ -5495,12 +5403,6 @@ export type SubscriptionRootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['subscription_root'] = ResolversParentTypes['subscription_root'],
 > = ResolversObject<{
-  _dummy?: SubscriptionResolver<
-    Maybe<ResolversTypes['Boolean']>,
-    '_dummy',
-    ParentType,
-    ContextType
-  >;
   quiz_answer_types?: SubscriptionResolver<
     Array<ResolversTypes['quiz_answer_types']>,
     'quiz_answer_types',
@@ -5759,8 +5661,6 @@ export interface UuidScalarConfig
 }
 
 export type Resolvers<ContextType = any> = ResolversObject<{
-  AddQuestionResponse?: AddQuestionResponseResolvers<ContextType>;
-  AddTagResponse?: AddTagResponseResolvers<ContextType>;
   Answer?: AnswerResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
