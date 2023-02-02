@@ -8,7 +8,7 @@ export const ApolloProvider: FC<{
   const apolloClient = useMemo(
     () =>
       createApolloClient({
-        uri: 'http://localhost:8080/v1/graphql',
+        uri: 'http://localhost:1111/graphql',
         credentials: 'include',
       }),
     [],
