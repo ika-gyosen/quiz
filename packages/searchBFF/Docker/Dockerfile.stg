@@ -1,0 +1,24 @@
+FROM node:16.13.0-alpine AS build-stage
+
+WORKDIR /app
+COPY package.json ./
+RUN yarn install
+COPY . ./
+RUN yarn build:staging
+
+FROM node:16.13.0-alpine AS production-stage
+
+WORKDIR /app
+COPY --from=build-stage /app/node_modules ./node_modules
+COPY --from=build-stage /app/dist ./dist
+# 日本時間に設定
+RUN apk --no-cache add tzdata \
+  && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+  && apk del tzdata \
+  && echo "Asia/Tokyo" >  /etc/timezone
+
+CMD ["node", "dist/main.js"]
+
+ARG HASURA_GRAPHQL_ADMIN_SECRET
+
+ENV HASURA_GRAPHQL_ADMIN_SECRET=${HASURA_GRAPHQL_ADMIN_SECRET}

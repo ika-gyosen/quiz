@@ -1,6 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
+import { environment } from '~/environmentConstant';
+import { config } from '~/config';
 
-export const hasuraClient = new GraphQLClient(
-  'http://localhost:8080/v1/graphql',
-  { headers: {} },
-);
+export const hasuraClient = new GraphQLClient(config.hasuraUrl, {
+  headers: { 'x-hasura-admin-secret': environment.hasuraGraphQLAdminSecret },
+});
