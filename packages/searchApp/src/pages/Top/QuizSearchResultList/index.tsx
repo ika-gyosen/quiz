@@ -37,61 +37,70 @@ export const QuizSearchResultList = (props: Props) => {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>No.</TableCell>
-            <TableCell className={difficultyTableHeadTextStyle}>
-              難易度
-            </TableCell>
-            <TableCell>カテゴリー</TableCell>
-            <TableCell>サブカテゴリー</TableCell>
-            <TableCell>タグ</TableCell>
-            <TableCell>問題</TableCell>
-            <TableCell>解答</TableCell>
-            <TableCell>読み方</TableCell>
-            <TableCell>別解・備考</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {questions.map((question) => (
-            <TableRow key={question?.questionId}>
-              <TableCell component="th" scope="row">
-                {question?.serialNumber}
+    <div>
+      <div className={textStyle}>
+        検索条件に合致する問題が{questions.length}問見つかりました。
+      </div>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>No.</TableCell>
+              <TableCell className={difficultyTableHeadTextStyle}>
+                難易度
               </TableCell>
-              <TableCell component="th" scope="row">
-                {question?.difficulty ?? ''}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {question?.category ?? ''}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {question.subCategory ?? ''}
-              </TableCell>
-              <TableCell component="th" scope="row"></TableCell>
-              <TableCell component="th" scope="row">
-                {question?.question}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {question?.answers[0].answer}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {question?.answers[0].pronunciation ?? ''}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {question?.answers[0].description === ''
-                  ? question.answers[0].description
-                  : null}
-              </TableCell>
+              <TableCell>カテゴリー</TableCell>
+              <TableCell>サブカテゴリー</TableCell>
+              <TableCell>タグ</TableCell>
+              <TableCell>問題</TableCell>
+              <TableCell>解答</TableCell>
+              <TableCell>読み方</TableCell>
+              <TableCell>別解・備考</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {questions.map((question) => (
+              <TableRow key={question?.questionId}>
+                <TableCell component="th" scope="row">
+                  {question?.serialNumber}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {question?.difficulty ?? ''}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {question?.category ?? ''}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {question.subCategory ?? ''}
+                </TableCell>
+                <TableCell component="th" scope="row"></TableCell>
+                <TableCell component="th" scope="row">
+                  {question?.question}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {question?.answers[0].answer}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {question?.answers[0].pronunciation ?? ''}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {question?.answers[0].description === ''
+                    ? question.answers[0].description
+                    : null}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 
 const difficultyTableHeadTextStyle = css`
   white-space: nowrap;
+`;
+
+const textStyle = css`
+  margin: 40px 4px 20px;
 `;
