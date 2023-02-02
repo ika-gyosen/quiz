@@ -1,13 +1,9 @@
 import { css } from '@emotion/css';
-import { Select, Option } from '~/components/Select';
+import { Option } from '~/components/Select';
 import { TextField } from '~/components/TextField';
 import { MultiSelect } from '~/components/MultiSelect';
 import { TagsInput } from '~/components/TagsInput';
-import {
-  difficultyOptions,
-  subCategoryOptions,
-  questionsNumberOptions,
-} from '~/constants/options';
+import { difficultyOptions, subCategoryOptions } from '~/constants/options';
 
 type Props = {
   difficulties: Option<number>[];
@@ -87,14 +83,14 @@ export const QuizSearchConditions = (props: Props) => {
           を含まない
         </div>
       </div>
-      <div className={searchInputRowStyle}>
+      {/* <div className={searchInputRowStyle}>
         表示する問題数:
         <Select
           value={questionsNumber}
           options={questionsNumberOptions}
           onChange={onChangeQuestionsNumber}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
