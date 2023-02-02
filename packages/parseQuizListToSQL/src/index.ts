@@ -3,9 +3,6 @@ import jsStringEscape from "js-string-escape";
 import { v4 as uuidv4 } from "uuid";
 import { getWorksheet } from "~/getWorksheet";
 import { getCurrentTimeFileName } from "~/getCurrentTimeFileName";
-import { addCategorySQL } from "~/addCategorySQL";
-import { addSubCategorySQL } from "~/addSubCategorySQL";
-import { addAnswerTypesSQL } from "~/addAnswerTypesSQL";
 
 type Input = {
   path: string;
@@ -33,12 +30,6 @@ export const createSql = async (input: Input) => {
 
   let sqlArray: string[] = [];
   let questionsSerialNumber = 1;
-
-  addAnswerTypesSQL({ sqlArray });
-
-  addCategorySQL({ sqlArray });
-
-  addSubCategorySQL({ sqlArray });
 
   const userId = uuidv4();
 
@@ -90,13 +81,15 @@ export const createSql = async (input: Input) => {
 
     const answer = row.getCell(10).value;
 
-    const pronunciation = "NULL";
+    // const pronunciation = "null";
 
-    const description = row.getCell(11).value;
+    const description = row.getCell(11).value
+      ? `E'${jsStringEscape(row.getCell(11).value)}'`
+      : "null";
 
     const answerSQL = `INSERT INTO "quiz"."answers"("id", "question_id", "answer", "pronunciation", "description") VALUES ('${answerId}', '${questionId}', E'${jsStringEscape(
       answer
-    )}', ${pronunciation}, E'${jsStringEscape(description)}');`;
+    )}', null, ${description});`;
 
     sqlArray.push(answerSQL);
 
