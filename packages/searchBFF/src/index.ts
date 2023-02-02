@@ -19,6 +19,15 @@ const main = async () => {
   server.applyMiddleware({
     app,
     path: '/graphql',
+    cors: {
+      origin: [
+        // local 開発時の searchApp のデフォルトポート
+        'http://localhost:5173',
+        // apollo studio（Apolloのsandboxを利用できるように許可する）
+        'https://studio.apollographql.com',
+      ],
+      credentials: true,
+    },
   });
 
   app.listen({ port, host: '0.0.0.0' }, () => {
