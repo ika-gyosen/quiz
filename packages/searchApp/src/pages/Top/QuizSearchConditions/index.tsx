@@ -54,7 +54,7 @@ export const QuizSearchConditions = (props: Props) => {
         />
       </div>
       <div className={searchInputRowStyle}>
-        ジャンル:
+        カテゴリー:
         <MultiSelect options={categoryOptions} onChange={onChangeCategories} />
       </div>
       <div className={searchInputRowStyle}>

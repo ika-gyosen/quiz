@@ -45,7 +45,8 @@ export const QuizSearchResultList = (props: Props) => {
             <TableCell className={difficultyTableHeadTextStyle}>
               難易度
             </TableCell>
-            <TableCell>ジャンル</TableCell>
+            <TableCell>カテゴリー</TableCell>
+            <TableCell>サブカテゴリー</TableCell>
             <TableCell>タグ</TableCell>
             <TableCell>問題</TableCell>
             <TableCell>解答</TableCell>
@@ -64,7 +65,8 @@ export const QuizSearchResultList = (props: Props) => {
               </TableCell>
               <TableCell component="th" scope="row">
                 {question?.category ?? ''}
-                <br />
+              </TableCell>
+              <TableCell component="th" scope="row">
                 {question.subCategory ?? ''}
               </TableCell>
               <TableCell component="th" scope="row"></TableCell>
@@ -78,7 +80,9 @@ export const QuizSearchResultList = (props: Props) => {
                 {question?.answers[0].pronunciation ?? ''}
               </TableCell>
               <TableCell component="th" scope="row">
-                {question?.answers[0].description ?? ''}
+                {question?.answers[0].description === ''
+                  ? question.answers[0].description
+                  : null}
               </TableCell>
             </TableRow>
           ))}
