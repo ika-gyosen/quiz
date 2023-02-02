@@ -84,9 +84,7 @@ export const QuizSearchResultList = (props: Props) => {
                   {question?.answers[0].pronunciation ?? ''}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {question?.answers[0].description === ''
-                    ? question.answers[0].description
-                    : null}
+                  {question?.answers[0].description ?? ''}
                 </TableCell>
               </TableRow>
             ))}
