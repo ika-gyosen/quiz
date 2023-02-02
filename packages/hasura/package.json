@@ -18,7 +18,7 @@
     "stg:status": "hasura migrate status --database-name default --envfile .hasura.env.stg --skip-update-check",
     "stg:delete:migrate": "hasura migrate delete --all --server --database-name default --envfile .hasura.env.stg",
     "stg:migrate": "hasura migrate apply --database-name default --envfile .hasura.env.stg --skip-update-check",
-    "stg:seed:apply:TEST_2": "hasura seed apply --file TEST_2.sql --database-name default --envfile .hasura.env.stg --skip-update-check"
+    "stg:seed:apply:kansei": "hasura seed apply --file sual-kansei-questions.sql --database-name default --envfile .hasura.env.stg --skip-update-check"
   },
   "keywords": [],
   "author": "",
